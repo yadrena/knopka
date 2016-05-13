@@ -10,16 +10,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by derektu on 4/16/16.
- */
-public class BTSerialPackage implements ReactPackage {
+public class BluetoothShutterPackage implements ReactPackage {
+
+    private final BluetoothButtonListener listener;
+
+    public BluetoothShutterPackage(BluetoothButtonListener listener) {
+        this.listener = listener;
+    }
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-
-        modules.add(new BTSerialModule(reactContext));
+        modules.add(new BluetoothShutterModule(reactContext, listener));
         return modules;
     }
 

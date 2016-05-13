@@ -1,52 +1,63 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import BusyIndicator from '../components/BusyIndicator';
-import {Button} from 'react-native-material-design';
-import BTSerial from '../native/BTSerial';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import Button from 'apsl-react-native-button'
+import BluetoothShutter from '../native/BluetoothShutter';
+import commonStyles from '../styles/common';
 
 export default class Home extends Component {
   state = {
-    enabled: false
+    pressed: false
   };
 
   //[{"id":"58:71:33:80:05:E3","address":"58:71:33:80:05:E3","name":"RSB-101"}]
   componentDidMount() {
-    BTSerial.isEnabled((error, enabled) => {
-      if (enabled)
-        BTSerial.listDevices((err, devices)=> console.log('Found devices: ', devices));
-      this.setState({enabled})
-    });
-
-    BTSerial.setConnectionStatusCallback((e)=> {
-      console.log('Connection status', JSON.stringify(e));
-    });
-
-    BTSerial.setDataAvailableCallback((e)=> {
-      console.log('Data available', JSON.stringify(e));
+    BluetoothShutter.init();
+    BluetoothShutter.listenShutter(() => {
+      console.log('Shutter pressed!!');
+      this.setState({pressed: true});
     });
   }
 
   render() {
+    const content = this.state.pressed ? this.renderPressed() : this.renderSimple();
     return (
       <View style={styles.container}>
-        {!this.state.enabled && <BusyIndicator message="Checking bluetooth..."/>}
-        {this.state.enabled && <Button value="Connect" onPress={this.connect}/>}
+        {content}
       </View>
     );
   }
 
-  connect = () => {
-    BTSerial.connect('58:71:33:80:05:E3', function(err, status, deviceName){
-    //BTSerial.connect('RSB-101', function(err, status, deviceName){
-      console.log('Connect', err, status, deviceName);
-    });
+  renderSimple = () => {
+    return (
+      <Text style={styles.label}>Ваш питомец не скучает!</Text>
+    );
+  };
+
+  renderPressed = () => {
+    return [
+      <Image key="img" source={{uri: 'dog'}} style={{width: 167, height: 275}} />,
+      <Text key="txt" style={styles.label}>Ваш питомец соскучился!</Text>,
+      <Button key="btn" onPress={this.onCancel} style={commonStyles.button}>OK</Button>
+    ]
+  };
+
+  onCancel = () => {
+    console.log('Cancel');
+    this.setState({pressed: false});
   }
+
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'black',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-around',
+    padding: 20
+  },
+  label: {
+    fontSize: 24,
+    color: 'white'
   }
 });
