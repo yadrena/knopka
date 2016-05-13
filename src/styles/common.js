@@ -10,5 +10,9 @@ export default StyleSheet.create({
   },
   input: {
     color: 'white'
+  },
+  header: {
+    color: 'white',
+    fontSize: 24
   }
 })

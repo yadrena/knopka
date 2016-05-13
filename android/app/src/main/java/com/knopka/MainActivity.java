@@ -28,6 +28,7 @@ public class MainActivity extends ReactActivity {
         //KeyEvent { action=ACTION_UP, keyCode=KEYCODE_VOLUME_UP, scanCode=115, metaState=0, flags=0x8, repeatCount=0, eventTime=127095596, downTime=127095303, deviceId=20, source=0x101 }
         if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && listener != null){
             listener.onPressed();
+            return true;
         }
         return super.onKeyUp(keyCode, event);
     }

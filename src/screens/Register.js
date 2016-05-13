@@ -14,14 +14,14 @@ class Register extends Component {
   };
 
   state = {
-    email: 'kaospostage+1@gmail.com',
+    email: '',
     password: ''
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Register</Text>
+        <Text style={commonStyles.header}>Register</Text>
         <TextInput placeholder="E-mail" keyboardType="email-address" value={this.state.email}
                    style={commonStyles.input} placeholderTextColor="white" underlineColorAndroid="white"
                    onChangeText={(text) => this.setState({email: text})}/>

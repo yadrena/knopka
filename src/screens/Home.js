@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import Button from 'apsl-react-native-button'
 import BluetoothShutter from '../native/BluetoothShutter';
+import CaesarLogo from '../components/CaesarLogo';
 import commonStyles from '../styles/common';
 
 export default class Home extends Component {
@@ -28,13 +29,15 @@ export default class Home extends Component {
   }
 
   renderSimple = () => {
-    return (
+    return [
+      <CaesarLogo/>,
       <Text style={styles.label}>Ваш питомец не скучает!</Text>
-    );
+    ];
   };
 
   renderPressed = () => {
     return [
+      <CaesarLogo/>,
       <Image key="img" source={{uri: 'dog'}} style={{width: 167, height: 275}} />,
       <Text key="txt" style={styles.label}>Ваш питомец соскучился!</Text>,
       <Button key="btn" onPress={this.onCancel} style={commonStyles.button}>OK</Button>

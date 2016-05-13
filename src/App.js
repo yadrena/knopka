@@ -27,9 +27,9 @@ export default class App extends Component {
       <Provider store={store}>
         <RouterWithRedux>
           <Scene key="root" hideNavBar={true} type="jump">
-            <Scene key="home" component={Home} title="Home"/>
             <Scene key="login" component={Login} title="Login"/>
             <Scene key="register" component={Register} title="Register"/>
+            <Scene key="home" component={Home} title="Home"/>
           </Scene>
         </RouterWithRedux>
       </Provider>

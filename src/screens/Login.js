@@ -4,6 +4,7 @@ import Button from 'apsl-react-native-button'
 import {login} from '../actions/Actions';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Actions} from 'react-native-router-flux';
+import CaesarLogo from '../components/CaesarLogo';
 import commonStyles from '../styles/common';
 
 class Login extends Component {
@@ -13,14 +14,15 @@ class Login extends Component {
   };
 
   state = {
-    email: 'kaospostage+1@gmail.com',
-    password: 'qwerty'
+    email: '',
+    password: ''
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Login</Text>
+        <CaesarLogo/>
+        <Text style={commonStyles.header}>Login</Text>
         <TextInput placeholder="E-mail" keyboardType="email-address" value={this.state.email}
                    style={commonStyles.input} placeholderTextColor="white" underlineColorAndroid="white"
                    onChangeText={(text) => this.setState({email: text})}/>
