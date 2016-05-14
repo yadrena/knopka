@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Actions, Scene, Router} from 'react-native-router-flux';
-import { Provider } from 'react-redux';
-import {connect} from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import configureStore from './store/configureStore';
 import Login from "./screens/Login";
 import Register from "./screens/Register";

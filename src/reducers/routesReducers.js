@@ -1,5 +1,5 @@
 const initialState = {
-  scene: {}
+  scene: undefined
 };
 
 export default function reducer(state = initialState, action = {}) {

@@ -1,5 +1,6 @@
 import Firebase from 'firebase';
 import {createAction} from 'redux-actions';
+import {Actions} from 'react-native-router-flux';
 import * as ActionTypes from './ActionTypes';
 import {Alert} from 'react-native';
 
@@ -17,6 +18,7 @@ export function register(email, password) {
         dispatch(setLoadingStatus(false));
         //uid : "1ada9111-ea79-41fa-821c-c6b698e1de70"
         dispatch(userRegistered(userData));
+        Actions.home();
       })
       .catch(error => {
         dispatch(setLoadingStatus(false));
@@ -42,6 +44,7 @@ export function login(email, password) {
         dispatch(setLoadingStatus(false));
         //uid : "1ada9111-ea79-41fa-821c-c6b698e1de70"
         dispatch(userLoggedIn(userData));
+        Actions.home();
       })
       .catch(error => {
         dispatch(setLoadingStatus(false));

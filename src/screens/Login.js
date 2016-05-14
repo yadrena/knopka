@@ -14,8 +14,8 @@ class Login extends Component {
   };
 
   state = {
-    email: '',
-    password: ''
+    email: 'kaospostage+2@gmail.com',
+    password: 'qwerty'
   };
 
   render() {
@@ -29,7 +29,7 @@ class Login extends Component {
           <TextInput placeholder="Password" secureTextEntry={true} value={this.state.password}
                      {...inputStyle}
                      onChangeText={(text) => this.setState({password: text})}/>
-          <Button onPress={Actions.home} {...buttonStyle}>Log In</Button>
+          <Button onPress={this.onLogin} {...buttonStyle}>Log In</Button>
           <Button onPress={Actions.register} {...linkStyle}>Register</Button>
         </View>
         <Button onPress={Actions.login} {...linkStyle}>Restore password</Button>

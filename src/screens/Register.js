@@ -15,8 +15,8 @@ class Register extends Component {
   };
 
   state = {
-    email: '',
-    password: ''
+    email: 'kaospostage+2@gmail.com',
+    password: 'qwerty'
   };
 
   render() {
@@ -30,7 +30,7 @@ class Register extends Component {
           <TextInput placeholder="Password" secureTextEntry={true} value={this.state.password}
             {...inputStyle}
                      onChangeText={(text) => this.setState({password: text})}/>
-          <Button onPress={Actions.home} {...buttonStyle}>Register</Button>
+          <Button onPress={this.onRegister} {...buttonStyle}>Register</Button>
         </View>
         <Button onPress={Actions.login} {...linkStyle}>I have login</Button>
       </View>
