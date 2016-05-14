@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {register} from '../actions/Actions';
 import Button from 'apsl-react-native-button'
 import {Actions} from 'react-native-router-flux';
-import commonStyles from '../styles/common';
+import CaesarLogo from '../components/CaesarLogo';
+import {buttonStyle, linkStyle, loginScreensStyle, inputStyle} from '../styles/common';
 
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 
@@ -20,16 +21,18 @@ class Register extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={commonStyles.header}>Register</Text>
-        <TextInput placeholder="E-mail" keyboardType="email-address" value={this.state.email}
-                   style={commonStyles.input} placeholderTextColor="white" underlineColorAndroid="white"
-                   onChangeText={(text) => this.setState({email: text})}/>
-        <TextInput placeholder="Password" secureTextEntry={true} value={this.state.password}
-                   style={commonStyles.input} placeholderTextColor="white" underlineColorAndroid="white"
-                   onChangeText={(text) => this.setState({password: text})}/>
-        <Button onPress={Actions.home} style={commonStyles.button}>Register</Button>
-        <Button onPress={Actions.login} style={commonStyles.button}>I have login</Button>
+      <View style={loginScreensStyle.rootContainer}>
+        <CaesarLogo/>
+        <View style={loginScreensStyle.middleContainer}>
+          <TextInput placeholder="E-mail" keyboardType="email-address" value={this.state.email}
+            {...inputStyle}
+                     onChangeText={(text) => this.setState({email: text})}/>
+          <TextInput placeholder="Password" secureTextEntry={true} value={this.state.password}
+            {...inputStyle}
+                     onChangeText={(text) => this.setState({password: text})}/>
+          <Button onPress={Actions.home} {...buttonStyle}>Register</Button>
+        </View>
+        <Button onPress={Actions.login} {...linkStyle}>I have login</Button>
       </View>
     );
   }

@@ -5,7 +5,7 @@ import {login} from '../actions/Actions';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import CaesarLogo from '../components/CaesarLogo';
-import commonStyles from '../styles/common';
+import {buttonStyle, linkStyle, loginScreensStyle, inputStyle} from '../styles/common';
 
 class Login extends Component {
 
@@ -20,17 +20,19 @@ class Login extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={loginScreensStyle.rootContainer}>
         <CaesarLogo/>
-        <Text style={commonStyles.header}>Login</Text>
-        <TextInput placeholder="E-mail" keyboardType="email-address" value={this.state.email}
-                   style={commonStyles.input} placeholderTextColor="white" underlineColorAndroid="white"
-                   onChangeText={(text) => this.setState({email: text})}/>
-        <TextInput placeholder="Password" secureTextEntry={true} value={this.state.password}
-                   style={commonStyles.input} placeholderTextColor="white" underlineColorAndroid="white"
-                   onChangeText={(text) => this.setState({password: text})}/>
-        <Button onPress={Actions.home} style={commonStyles.button}>Log In</Button>
-        <Button onPress={Actions.register} style={commonStyles.button}>Register</Button>
+        <View style={loginScreensStyle.middleContainer}>
+          <TextInput placeholder="E-mail" keyboardType="email-address" value={this.state.email}
+                     {...inputStyle}
+                     onChangeText={(text) => this.setState({email: text})}/>
+          <TextInput placeholder="Password" secureTextEntry={true} value={this.state.password}
+                     {...inputStyle}
+                     onChangeText={(text) => this.setState({password: text})}/>
+          <Button onPress={Actions.home} {...buttonStyle}>Log In</Button>
+          <Button onPress={Actions.register} {...linkStyle}>Register</Button>
+        </View>
+        <Button onPress={Actions.login} {...linkStyle}>Restore password</Button>
       </View>
     );
   }
@@ -41,13 +43,3 @@ class Login extends Component {
 }
 
 export default connect(undefined, {login})(Login);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: 'black'
-  }
-});

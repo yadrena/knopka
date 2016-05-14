@@ -26,10 +26,10 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <RouterWithRedux>
-          <Scene key="root" hideNavBar={true} type="jump">
-            <Scene key="login" component={Login} title="Login"/>
-            <Scene key="register" component={Register} title="Register"/>
-            <Scene key="home" component={Home} title="Home"/>
+          <Scene key="root" hideNavBar={true} hideTabBar={true} type="jump">
+            <Scene key="login" hideNavBar={true} component={Login} title="Login"/>
+            <Scene key="register" hideNavBar={true} component={Register} title="Register"/>
+            <Scene key="home" hideNavBar={true} component={Home} title="Home"/>
           </Scene>
         </RouterWithRedux>
       </Provider>

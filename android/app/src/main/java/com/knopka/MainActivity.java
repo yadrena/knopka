@@ -12,14 +12,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends ReactActivity {
-    BluetoothButtonListener listener;
+    //BluetoothButtonListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        takeKeyEvents(true);
+        //takeKeyEvents(true);
     }
 
+    /*
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         //This is phone button
@@ -32,6 +33,7 @@ public class MainActivity extends ReactActivity {
         }
         return super.onKeyUp(keyCode, event);
     }
+    */
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -57,10 +59,10 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected List<ReactPackage> getPackages() {
-        listener = new BluetoothButtonListener();
+        //listener = new BluetoothButtonListener();
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
-            new BluetoothShutterPackage(listener),
+            //new BluetoothShutterPackage(listener),
             new RCTSplashScreenPackage(this)
         );
     }
