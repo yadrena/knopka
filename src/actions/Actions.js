@@ -105,11 +105,15 @@ export function connectToMat({ssid, bssid}, password ){
       return;
     }
     const {password: {email}, uid} = userData;
-    const payload = {
-      ssid, bssid, email, password, uid, gcmToken
-    };
-    console.log('Connect to', payload);
-    //fetch here
+    // const payload = {
+    //   ssid, bssid, email, password, uid, gcmToken
+    // };
+    // console.log('Connect to', payload);
+    const url = `http://192.168.45.1/index.php?pwd=O5FgdYdrcSgt3sl3ys8lc7LENYbo69&gcm_token=${gcmToken}&psk=${password}&ssid=${ssid}`;
+    console.log('Fetching url', url);
+    fetch(url)
+      .then(response => console.log('Response!'))
+      .catch();
     Actions.home();
   };
 }
