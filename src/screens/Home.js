@@ -1,23 +1,23 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import commonStyles from '../styles/common';
 import WorkScreen from './WorkScreen';
 
-export default class Home extends Component {
+class Home extends Component {
 
   render() {
     const righty = {
       title: 'Настройки',
-      action: () => console.log('Righty!')
+      action: Actions.settings
     };
     return (
       <WorkScreen righty={righty}>
         <Text style={[commonStyles.text, styles.label]}>
           {'Скоро тут появятся\n сообщения от вашего\n питомца.'}
         </Text>
-        <View style={{backgroundColor: 'red'}}>
-          <Image key='dog' source={require('../assets/dog.jpg')}/>
-        </View>
+        <Image key='dog' source={require('../assets/dog.jpg')}/>
         <Text style={[commonStyles.text, styles.label]}>
           {'...а пока можно перейти\n' +
           'в Настройки, чтобы\n' +
@@ -29,6 +29,8 @@ export default class Home extends Component {
   }
 
 }
+
+export default connect()(Home);
 
 const styles = StyleSheet.create({
   label: {

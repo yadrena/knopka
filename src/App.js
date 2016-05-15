@@ -5,6 +5,7 @@ import configureStore from './store/configureStore';
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import Home from "./screens/Home";
+import Settings from "./screens/Settings";
 import WifiManual from "./screens/WifiManual";
 import ConnectMat from "./screens/ConnectMat";
 import {checkWifi} from './actions/Actions';
@@ -37,7 +38,8 @@ export default class App extends Component {
             <Scene key="workScreens" hideNavBar={true}>
               <Scene key="wifiManual" component={WifiManual} initial={true}/>
               <Scene key="connectMat" component={ConnectMat}/>
-              <Scene key="home" component={Home} title="Home"/>
+              <Scene key="home" component={Home}/>
+              <Scene key="settings" component={Settings}/>
             </Scene>
           </Scene>
         </RouterWithRedux>
