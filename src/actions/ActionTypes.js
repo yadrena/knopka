@@ -7,3 +7,7 @@ export const GCM_REGISTERED = 'GCM_REGISTERED';
 export const SET_AVATAR = 'SET_AVATAR';
 export const SET_NICKNAME = 'SET_NICKNAME';
 export const SET_RECEIVE_PUSH = 'SET_RECEIVE_PUSH';
+
+//Notifications
+export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
+export const POP_NOTIFICATION = 'POP_NOTIFICATION';

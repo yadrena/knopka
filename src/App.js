@@ -8,7 +8,7 @@ import Home from "./screens/Home";
 import Settings from "./screens/Settings";
 import WifiManual from "./screens/WifiManual";
 import ConnectMat from "./screens/ConnectMat";
-import {checkWifi} from './actions/Actions';
+import {checkWifi, addNotification} from './actions/Actions';
 
 import SplashScreen from '@remobile/react-native-splashscreen';
 import GCM from 'react-native-gcm-push-notification';
@@ -25,9 +25,8 @@ export default class App extends Component {
     store.dispatch(checkWifi());
     setTimeout( () => SplashScreen.hide(), 1000);
     GCM.addEventListener('notification', function(notification){
-      console.log('receive gcm notification', notification);
       var info = JSON.parse(notification.data.info);
-      console.log('notification info', info);
+      store.dispatch(addNotification(info));
     });
   }
 
