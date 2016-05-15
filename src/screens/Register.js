@@ -32,7 +32,7 @@ class Register extends Component {
                      onChangeText={(text) => this.setState({password: text})}/>
           <Button onPress={this.onRegister} {...buttonStyle}>Register</Button>
         </View>
-        <Button onPress={Actions.login} {...linkStyle}>I have login</Button>
+        <Button onPress={Actions.pop} {...linkStyle}>I have login</Button>
       </View>
     );
   }

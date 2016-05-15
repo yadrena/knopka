@@ -20,7 +20,7 @@ export function register(email, password) {
         dispatch(setLoadingStatus(false));
         //uid : "1ada9111-ea79-41fa-821c-c6b698e1de70"
         dispatch(userRegistered(userData));
-        Actions.home();
+        Actions.workScreens();
       })
       .catch(error => {
         dispatch(setLoadingStatus(false));
@@ -46,7 +46,7 @@ export function login(email, password) {
         dispatch(setLoadingStatus(false));
         //uid : "1ada9111-ea79-41fa-821c-c6b698e1de70"
         dispatch(userLoggedIn(userData));
-        Actions.home();
+        Actions.workScreens();
       })
       .catch(error => {
         dispatch(setLoadingStatus(false));

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import Button from 'apsl-react-native-button'
+import Button from 'apsl-react-native-button';
 import {login} from '../actions/Actions';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Actions} from 'react-native-router-flux';

@@ -25,6 +25,9 @@ const components = StyleSheet.create({
   header: {
     color: 'white',
     fontSize: 24
+  },
+  text: {
+    color: 'white'
   }
 });
 

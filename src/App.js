@@ -5,6 +5,8 @@ import configureStore from './store/configureStore';
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import Home from "./screens/Home";
+import WifiManual from "./screens/WifiManual";
+import ConnectMat from "./screens/ConnectMat";
 import {checkWifi} from './actions/Actions';
 
 import SplashScreen from '@remobile/react-native-splashscreen';
@@ -27,10 +29,16 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <RouterWithRedux>
-          <Scene key="root" hideNavBar={true} hideTabBar={true} type="jump">
-            <Scene key="login" hideNavBar={true} component={Login} title="Login"/>
-            <Scene key="register" hideNavBar={true} component={Register} title="Register"/>
-            <Scene key="home" hideNavBar={true} component={Home} title="Home"/>
+          <Scene key="root" type="jump">
+            <Scene key="authScreens" hideNavBar={true}>
+              <Scene key="login" component={Login}/>
+              <Scene key="register" component={Register} type="push"/>
+            </Scene>
+            <Scene key="workScreens" hideNavBar={true}>
+              <Scene key="wifiManual" component={WifiManual} initial={true}/>
+              <Scene key="connectMat" component={ConnectMat}/>
+              <Scene key="home" component={Home} title="Home"/>
+            </Scene>
           </Scene>
         </RouterWithRedux>
       </Provider>
