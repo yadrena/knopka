@@ -28,6 +28,11 @@ const components = StyleSheet.create({
   },
   text: {
     color: 'white'
+  },
+  avatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 60
   }
 });
 

@@ -1,6 +1,6 @@
 import * as ActionTypes from '../actions/ActionTypes';
 
-const initialState = [];
+const initialState = [{message: 'First'}, {message: 'Second'}, {message: 'Third'}];
 
 export default function reducer(state = initialState, action) {
   const payload = action.payload;

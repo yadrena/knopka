@@ -5,6 +5,7 @@ import {Actions} from 'react-native-router-flux';
 import {setAvatar, setNickname, setReceivePush} from '../actions/Actions';
 import commonStyles, {inputStyle} from '../styles/common';
 import WorkScreen from './WorkScreen';
+import Avatar from '../components/Avatar';
 
 const ImagePickerManager = NativeModules.ImagePickerManager;
 
@@ -22,15 +23,9 @@ class Settings extends React.Component {
       title: 'Назад',
       action: Actions.pop
     };
-    const photoContent = this.props.avatar ?
-      <Image source={this.props.avatar} style={styles.photo}/> :
-      <View style={[styles.photo, {backgroundColor: 'red'}]}/>;
-
     return (
       <WorkScreen lefty={lefty}>
-        <TouchableWithoutFeedback onPress={this.onCameraPress}>
-          {photoContent}
-        </TouchableWithoutFeedback>
+        <Avatar avatar={this.props.avatar} onPress={this.onCameraPress}/>
         <TextInput placeholder="Кличка" value={this.props.nickname} {...inputStyle}
                    onChangeText={this.props.setNickname}/>
         <View style={styles.switchHolder}>
