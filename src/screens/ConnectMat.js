@@ -3,19 +3,20 @@ import {View, Text, TextInput, Picker, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Button from 'apsl-react-native-button';
 import commonStyle, {buttonStyle, inputStyle} from '../styles/common';
-import {Actions} from 'react-native-router-flux';
+import {connectToMat} from '../actions/Actions';
 import WorkScreen from './WorkScreen';
 import BusyIndicator from '../components/BusyIndicator';
 
 class ConnectMat extends React.Component {
   static propTypes = {
     wifiLoaded: PropTypes.bool,
-    wifiList: PropTypes.array
+    wifiList: PropTypes.array,
+    connectToMat: PropTypes.func
   };
 
   static mapStateToProps = state => ({
     wifiLoaded: state.wifis.loaded,
-    wifiList: state.wifis.list.map( v => v.SSID)
+    wifiList: state.wifis.list.map( v => ({ssid: v.SSID, bssid: v.BSSID}))
   });
 
   state={
@@ -24,8 +25,8 @@ class ConnectMat extends React.Component {
   };
 
   render() {
-    const {wifiLoaded, wifiList} = this.props;
-    const wifis = wifiLoaded ? wifiList.map(ssid => <Picker.Item key={ssid} label={ssid} value={ssid}/>) : null;
+    const {wifiLoaded, wifiList, connectToMat} = this.props;
+    const wifis = wifiLoaded ? wifiList.map(v => <Picker.Item key={v.ssid} label={v.ssid} value={v}/>) : null;
     return (
       <WorkScreen>
         <Text style={commonStyle.text}>Choose network</Text>
@@ -41,13 +42,17 @@ class ConnectMat extends React.Component {
           {...inputStyle}
                    onChangeText={password => this.setState({password})}/>
         }
-        <Button onPress={Actions.home} {...buttonStyle}>Connect</Button>
+        <Button onPress={this.onConnectPressed} {...buttonStyle}>Connect</Button>
       </WorkScreen>
     );
   }
+
+  onConnectPressed = () => {
+    this.props.connectToMat(this.state.wifi, this.state.password);
+  }
 }
 
-export default connect(ConnectMat.mapStateToProps)(ConnectMat);
+export default connect(ConnectMat.mapStateToProps, {connectToMat})(ConnectMat);
 
 var styles = StyleSheet.create({
   picker: {

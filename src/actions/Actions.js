@@ -8,7 +8,6 @@ import wifi from 'react-native-android-wifi';
 const firebase = new Firebase('https://knopka.firebaseio.com');
 
 const setLoadingStatus = createAction(ActionTypes.LOADING);
-const userRegistered = createAction(ActionTypes.USER_REGISTERED);
 const userLoggedIn = createAction(ActionTypes.USER_LOGGED_IN);
 const wifiListed = createAction(ActionTypes.WIFI_LISTED);
 
@@ -16,12 +15,9 @@ export function register(email, password) {
   return (dispatch, create) => {
     dispatch(setLoadingStatus(true));
     return firebase.createUser({email, password})
-      .then(userData => {
-        dispatch(setLoadingStatus(false));
-        //uid : "1ada9111-ea79-41fa-821c-c6b698e1de70"
-        dispatch(userRegistered(userData));
-        Actions.workScreens();
-      })
+      .then( () =>
+        dispatch(login(email, password))
+      )
       .catch(error => {
         dispatch(setLoadingStatus(false));
         switch (error.code) {
@@ -72,4 +68,16 @@ export function checkWifi(){
       }
     });
   }
+}
+
+export function connectToMat({ssid, bssid}, password ){
+  return (dispatch, getState) => {
+    const userData = getState().auth.userData;
+    if (!userData) {
+      Alert.alert('Connection error', 'User must be logged in to connect to mat');
+      return;
+    }
+    const {password: {email}, uid} = userData;
+    console.log('Connect to', ssid, bssid, password, email, uid);
+  };
 }

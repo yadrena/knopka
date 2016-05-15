@@ -9,8 +9,6 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case ActionTypes.USER_LOGGED_IN:
       return {...state, userData: payload};
-    case ActionTypes.USER_REGISTERED:
-      return {...state, userData: payload};
     default:
       return state;
   }
