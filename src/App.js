@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {BackAndroid} from 'react-native';
 import {Actions, Scene, Router} from 'react-native-router-flux';
 import { Provider, connect } from 'react-redux';
 import configureStore from './store/configureStore';
@@ -23,6 +24,11 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', function() {
+      //Ignore back button
+      return true;
+    });
+
     store.dispatch(checkWifi());
     setTimeout( () => SplashScreen.hide(), 1000);
     GCM.addEventListener('notification', function(notification){
