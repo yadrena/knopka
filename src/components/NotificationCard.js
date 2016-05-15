@@ -45,7 +45,7 @@ export default class NotificationCard extends React.Component {
   }
 }
 
-const STEP = 20;
+const STEP = 8;
 const CARD_COLORS = ['#d8d8d8', '#cccccc', '#a8a8a8'];
 
 const styles = StyleSheet.create({
@@ -53,13 +53,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    paddingVertical: 20,
+    justifyContent: 'space-around',
+    borderRadius: 2
   },
   nickname: {
     color: 'black',
     fontSize: 24
   },
   message: {
+    flex: 1,
     color: 'black',
     fontSize: 18,
     textAlign: 'center'
