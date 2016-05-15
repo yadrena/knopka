@@ -84,12 +84,20 @@ export function checkWifi(){
 
 export function connectToMat({ssid, bssid}, password ){
   return (dispatch, getState) => {
-    const userData = getState().auth.userData;
+    const {userData, gcmToken} = getState().auth;
     if (!userData) {
       Alert.alert('Connection error', 'User must be logged in to connect to mat');
       return;
     }
+    else if (!gcmToken){
+      Alert.alert('Connection error', 'Cannot find GCM token');
+      return;
+    }
     const {password: {email}, uid} = userData;
-    console.log('Connect to', ssid, bssid, password, email, uid);
+    const payload = {
+      ssid, bssid, email, password, uid, gcmToken
+    };
+    console.log('Connect to', payload);
+    //fetch here
   };
 }
