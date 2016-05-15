@@ -14,6 +14,7 @@ import com.remobile.splashscreen.*;
 import java.util.Arrays;
 import java.util.List;
 import com.devstepbcn.wifi.AndroidWifiPackage;
+import com.imagepicker.ImagePickerPackage;
 
 public class MainActivity extends ReactActivity {
     //BluetoothButtonListener listener;
@@ -68,6 +69,7 @@ public class MainActivity extends ReactActivity {
             new MainReactPackage(),
             new GcmPackage(),
             new AndroidWifiPackage(),
+            new ImagePickerPackage(),
             //new BluetoothShutterPackage(listener),
             new RCTSplashScreenPackage(this)
         );

@@ -127,6 +127,7 @@ dependencies {
     compile project(':react-native-gcm-push-notification')
     compile project(':react-native-android-wifi')
     compile project(':react-native-splashscreen')
+    compile project(':react-native-image-picker')
 }
 
 // Run this once to be able to run the application with BUCK

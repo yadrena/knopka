@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import {View, Text, TextInput, Switch, StyleSheet} from 'react-native';
+import {View, Text, TextInput, Switch, TouchableWithoutFeedback, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import commonStyles, {inputStyle} from '../styles/common';
@@ -22,7 +22,9 @@ class Settings extends React.Component {
     };
     return (
       <WorkScreen lefty={lefty}>
-        <View style={styles.photo}/>
+        <TouchableWithoutFeedback onPress={this.onCameraPress}>
+          <View style={styles.photo}/>
+        </TouchableWithoutFeedback>
         <TextInput placeholder="Кличка" value={this.state.nickname} {...inputStyle}
                    onChangeText={(text) => this.setState({password: text})}/>
         <View style={styles.switchHolder}>
@@ -32,6 +34,10 @@ class Settings extends React.Component {
         </View>
       </WorkScreen>
     );
+  }
+
+  onCameraPress = () => {
+    
   }
 }
 
