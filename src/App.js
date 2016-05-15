@@ -22,7 +22,7 @@ export default class App extends Component {
 
   componentDidMount() {
     store.dispatch(checkWifi());
-    setTimeout( () => SplashScreen.hide(), 2000);
+    setTimeout( () => SplashScreen.hide(), 1000);
   }
 
   render() {

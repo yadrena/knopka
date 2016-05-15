@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Button from 'apsl-react-native-button';
 import commonStyle, {buttonStyle} from '../styles/common';
 import {Actions} from 'react-native-router-flux';
+import WorkScreen from './WorkScreen';
 
 class WifiManual extends React.Component {
   static propTypes = {};
@@ -12,20 +13,12 @@ class WifiManual extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <WorkScreen>
         <Text style={commonStyle.text}>Wifi manual</Text>
         <Button onPress={Actions.connectMat} {...buttonStyle}>Next</Button>
-      </View>
+      </WorkScreen>
     );
   }
 }
 
 export default connect(WifiManual.mapStateToProps)(WifiManual);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});

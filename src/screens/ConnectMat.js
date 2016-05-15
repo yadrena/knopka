@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Button from 'apsl-react-native-button';
 import commonStyle, {buttonStyle} from '../styles/common';
 import {Actions} from 'react-native-router-flux';
+import WorkScreen from './WorkScreen';
 
 class ConnectMat extends React.Component {
   static propTypes = {};
@@ -12,20 +13,12 @@ class ConnectMat extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <WorkScreen>
         <Text style={commonStyle.text}>Networks...</Text>
         <Button onPress={Actions.home} {...buttonStyle}>Connect</Button>
-      </View>
+      </WorkScreen>
     );
   }
 }
 
 export default connect(ConnectMat.mapStateToProps)(ConnectMat);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
