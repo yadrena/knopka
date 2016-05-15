@@ -27,7 +27,14 @@ export default class App extends Component {
     setTimeout( () => SplashScreen.hide(), 1000);
     GCM.addEventListener('notification', function(notification){
       var info = JSON.parse(notification.data.info);
+      console.log('Received notification:', info, GCM.isInForeground);
       store.dispatch(addNotification(info));
+      if (!GCM.isInForeground) {
+        Notification.create({
+          subject: info.subject,
+          message: info.message
+        });
+      }
     });
   }
 

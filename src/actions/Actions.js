@@ -4,6 +4,7 @@ import {Actions} from 'react-native-router-flux';
 import * as ActionTypes from './ActionTypes';
 import {Alert} from 'react-native';
 import wifi from 'react-native-android-wifi';
+
 import GCM from 'react-native-gcm-push-notification';
 import {DeviceEventEmitter} from 'react-native';
 
