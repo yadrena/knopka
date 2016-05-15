@@ -29,10 +29,10 @@ class ConnectMat extends React.Component {
     const wifis = wifiLoaded ? wifiList.map(v => <Picker.Item key={v.ssid} label={v.ssid} value={v}/>) : null;
     return (
       <WorkScreen>
-        <Text style={commonStyle.text}>Choose network</Text>
+        <Text style={commonStyle.text}>Выберите домашнюю сеть</Text>
         {!wifiLoaded && <BusyIndicator message="Scanning wifi networks..."/>}
         {wifiLoaded &&
-        <Picker selectedValue={this.state.wifi} prompt="Choose network" mode="dialog"
+        <Picker selectedValue={this.state.wifi} prompt="Выберите домашнюю сеть" mode="dialog"
                 onValueChange={wifi => this.setState({wifi})} style={styles.picker}>
           {wifis}
         </Picker>
