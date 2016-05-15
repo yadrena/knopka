@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'
-import {View, Text, Picker, StyleSheet} from 'react-native';
+import {View, Text, TextInput, Picker, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Button from 'apsl-react-native-button';
-import commonStyle, {buttonStyle} from '../styles/common';
+import commonStyle, {buttonStyle, inputStyle} from '../styles/common';
 import {Actions} from 'react-native-router-flux';
 import WorkScreen from './WorkScreen';
 import BusyIndicator from '../components/BusyIndicator';
@@ -19,7 +19,8 @@ class ConnectMat extends React.Component {
   });
 
   state={
-    wifi: null
+    wifi: null,
+    password: ''
   };
 
   render() {
@@ -34,6 +35,11 @@ class ConnectMat extends React.Component {
                 onValueChange={wifi => this.setState({wifi})} style={styles.picker}>
           {wifis}
         </Picker>
+        }
+        {wifiLoaded &&
+        <TextInput placeholder="Password" secureTextEntry={true} value={this.state.password}
+          {...inputStyle}
+                   onChangeText={password => this.setState({password})}/>
         }
         <Button onPress={Actions.home} {...buttonStyle}>Connect</Button>
       </WorkScreen>
