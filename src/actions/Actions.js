@@ -99,5 +99,6 @@ export function connectToMat({ssid, bssid}, password ){
     };
     console.log('Connect to', payload);
     //fetch here
+    Actions.home();
   };
 }
