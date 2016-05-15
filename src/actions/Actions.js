@@ -4,12 +4,14 @@ import {Actions} from 'react-native-router-flux';
 import * as ActionTypes from './ActionTypes';
 import {Alert} from 'react-native';
 import wifi from 'react-native-android-wifi';
+import GCM from 'react-native-gcm-push-notification';
 
 const firebase = new Firebase('https://knopka.firebaseio.com');
 
 const setLoadingStatus = createAction(ActionTypes.LOADING);
 const userLoggedIn = createAction(ActionTypes.USER_LOGGED_IN);
 const wifiListed = createAction(ActionTypes.WIFI_LISTED);
+const gcmRegistered = createAction(ActionTypes.GCM_REGISTERED);
 
 export function register(email, password) {
   return (dispatch, create) => {
@@ -42,7 +44,17 @@ export function login(email, password) {
         dispatch(setLoadingStatus(false));
         //uid : "1ada9111-ea79-41fa-821c-c6b698e1de70"
         dispatch(userLoggedIn(userData));
-        Actions.workScreens();
+        GCM.addEventListener('register', function(data){
+          if(!data.error){
+            dispatch(gcmRegistered(data.registrationToken));
+          }
+          else {
+            Alert.alert('GCM Error', 'Failed to register token: ' + data.error);
+            console.log('GCM error:', data.error);
+          }
+          Actions.workScreens();
+        });
+        GCM.requestPermissions();
       })
       .catch(error => {
         dispatch(setLoadingStatus(false));

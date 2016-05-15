@@ -1,7 +1,8 @@
 import * as ActionTypes from '../actions/ActionTypes';
 
 const initialState = {
-  userData: null
+  userData: null,
+  gcmToken: null
 };
 
 export default function reducer(state = initialState, action) {
@@ -9,6 +10,8 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case ActionTypes.USER_LOGGED_IN:
       return {...state, userData: payload};
+    case ActionTypes.GCM_REGISTERED:
+      return {...state, gcmToken: payload};
     default:
       return state;
   }
