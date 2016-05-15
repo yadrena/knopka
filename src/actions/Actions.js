@@ -3,12 +3,14 @@ import {createAction} from 'redux-actions';
 import {Actions} from 'react-native-router-flux';
 import * as ActionTypes from './ActionTypes';
 import {Alert} from 'react-native';
+import wifi from 'react-native-android-wifi';
 
 const firebase = new Firebase('https://knopka.firebaseio.com');
 
 const setLoadingStatus = createAction(ActionTypes.LOADING);
 const userRegistered = createAction(ActionTypes.USER_REGISTERED);
 const userLoggedIn = createAction(ActionTypes.USER_LOGGED_IN);
+const wifiListed = createAction(ActionTypes.WIFI_LISTED);
 
 export function register(email, password) {
   return (dispatch, create) => {
@@ -50,5 +52,24 @@ export function login(email, password) {
         dispatch(setLoadingStatus(false));
         Alert.alert('Login failed', 'Login failed: ' + error);
       });
+  }
+}
+
+export function checkWifi(){
+  return (dispatch, getState) => {
+    wifi.isEnabled((isEnabled)=>{
+      if (isEnabled){
+        wifi.loadWifiList((wifiStringList) => {
+            var wifiArray = JSON.parse(wifiStringList);
+            dispatch(wifiListed(wifiArray));
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }else{
+        console.log("wifi service is disabled");
+      }
+    });
   }
 }

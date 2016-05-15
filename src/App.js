@@ -5,6 +5,7 @@ import configureStore from './store/configureStore';
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import Home from "./screens/Home";
+import {checkWifi} from './actions/Actions';
 
 import SplashScreen from '@remobile/react-native-splashscreen';
 
@@ -18,6 +19,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    store.dispatch(checkWifi());
     setTimeout( () => SplashScreen.hide(), 2000);
   }
 
