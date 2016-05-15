@@ -11,7 +11,7 @@ import ConnectMat from "./screens/ConnectMat";
 import {checkWifi} from './actions/Actions';
 
 import SplashScreen from '@remobile/react-native-splashscreen';
-
+import GCM from 'react-native-gcm-push-notification';
 
 const RouterWithRedux = connect()(Router);
 const store = configureStore();
@@ -24,6 +24,11 @@ export default class App extends Component {
   componentDidMount() {
     store.dispatch(checkWifi());
     setTimeout( () => SplashScreen.hide(), 1000);
+    GCM.addEventListener('notification', function(notification){
+      console.log('receive gcm notification', notification);
+      var info = JSON.parse(notification.data.info);
+      console.log('notification info', info);
+    });
   }
 
   render() {

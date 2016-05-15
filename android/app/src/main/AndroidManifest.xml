@@ -1,56 +1,56 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.knopka"
-    android:versionCode="1"
-    android:versionName="1.0">
+          package="com.knopka"
+          android:versionCode="1"
+          android:versionName="1.0">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="com.google.android.c2dm.permission.SEND" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.SEND"/>
 
     <permission
             android:name="com.knopka.permission.C2D_MESSAGE"
-            android:protectionLevel="signature" />
-    <uses-permission android:name="com.knopka.permission.C2D_MESSAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+            android:protectionLevel="signature"/>
+    <uses-permission android:name="com.knopka.permission.C2D_MESSAGE"/>
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
     <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
 
     <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="22" />
+            android:minSdkVersion="16"
+            android:targetSdkVersion="22"/>
 
     <application
-      android:allowBackup="true"
-      android:label="@string/app_name"
-      android:icon="@mipmap/ic_launcher"
-      android:theme="@style/AppTheme">
+            android:allowBackup="true"
+            android:label="@string/app_name"
+            android:icon="@mipmap/ic_launcher"
+            android:theme="@style/AppTheme">
         <receiver
                 android:name="com.google.android.gms.gcm.GcmReceiver"
                 android:exported="true"
-                android:permission="com.google.android.c2dm.permission.SEND" >
+                android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="com.knopka" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <category android:name="com.knopka"/>
             </intent-filter>
         </receiver>
         <service android:name="com.oney.gcm.GcmRegistrationService"/>
         <service
                 android:name="com.oney.gcm.RNGcmListenerService"
-                android:exported="false" >
+                android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
             </intent-filter>
         </service>
         <service android:name="com.oney.gcm.RNGcmInstanceIDListenerService" android:exported="false">
@@ -59,15 +59,22 @@
             </intent-filter>
         </service>
         <activity
-        android:name=".MainActivity"
-        android:label="@string/app_name"
-        android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-      </activity>
-      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+                android:name=".MainActivity"
+                android:label="@string/app_name"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
+        <receiver android:name="io.neson.react.notification.NotificationEventReceiver" />   <!-- <- Add this line -->
+        <receiver android:name="io.neson.react.notification.NotificationPublisher" />       <!-- <- Add this line -->
+        <receiver android:name="io.neson.react.notification.SystemBootEventReceiver">       <!-- <- Add this line -->
+            <intent-filter>                                                                   <!-- <- Add this line -->
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>           <!-- <- Add this line -->
+            </intent-filter>                                                                  <!-- <- Add this line -->
+        </receiver>
     </application>
 
 </manifest>
