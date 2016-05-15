@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react'
 import {View, StyleSheet} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 import WorkScreenHeader from '../components/WorkScreenHeader';
 
 export default class WorkScreen extends React.Component {
@@ -7,6 +8,13 @@ export default class WorkScreen extends React.Component {
     lefty: PropTypes.object,
     righty: PropTypes.object,
     contentStyle: PropTypes.object
+  };
+
+  static defaultProps = {
+    lefty: {
+      title: 'Назад',
+      action: Actions.pop
+    }
   };
 
   render() {

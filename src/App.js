@@ -53,7 +53,7 @@ export default class App extends Component {
               <Scene key="login" component={Login}/>
               <Scene key="register" component={Register} type="push"/>
             </Scene>
-            <Scene key="workScreens" hideNavBar={true}>
+            <Scene key="workScreens" hideNavBar={true} type="push" >
               <Scene key="wifiManual" component={WifiManual} initial={true}/>
               <Scene key="connectMat" component={ConnectMat}/>
               <Scene key="home" component={Home}/>

@@ -19,12 +19,8 @@ class Settings extends React.Component {
   static mapStateToProps = state => ({...state.settings});
 
   render() {
-    const lefty = {
-      title: 'Назад',
-      action: Actions.pop
-    };
     return (
-      <WorkScreen lefty={lefty}>
+      <WorkScreen>
         <Avatar avatar={this.props.avatar} onPress={this.onCameraPress}/>
         <TextInput placeholder="Кличка" value={this.props.nickname} {...inputStyle}
                    onChangeText={this.props.setNickname}/>
