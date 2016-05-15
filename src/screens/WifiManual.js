@@ -14,7 +14,18 @@ class WifiManual extends React.Component {
   render() {
     return (
       <WorkScreen>
-        <Text style={commonStyle.text}>Wifi manual</Text>
+        <Text style={[commonStyle.text, {marginBottom: 48}]}>
+          {
+            'Сверните приложение,\n' +
+            'перейдите в настройки\n' +
+            'и подключитесь к\n' +
+            'Wi-Fi сети miss-U-mat\n\n' +
+            'Если для подключения\n' +
+            'потребуется пароль,\n' +
+            'введите umat1234.\n\n' +
+            'Вернитесь в приложение.'
+          }
+        </Text>
         <Button onPress={Actions.connectMat} {...buttonStyle}>Next</Button>
       </WorkScreen>
     );
