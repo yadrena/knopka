@@ -2,29 +2,28 @@ import React, {PropTypes} from 'react'
 import {View, Text, TextInput, Switch, Image, TouchableWithoutFeedback, StyleSheet, NativeModules} from 'react-native';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
+import {setAvatar, setNickname, setReceivePush} from '../actions/Actions';
 import commonStyles, {inputStyle} from '../styles/common';
 import WorkScreen from './WorkScreen';
 
 const ImagePickerManager = NativeModules.ImagePickerManager;
 
 class Settings extends React.Component {
-  static propTypes = {};
-
-  static mapStateToProps = state => ({});
-
-  state = {
-    nickname: '',
-    receivePush: true,
-    avatarSource: null
+  static propTypes = {
+    avatar: PropTypes.object,
+    nickname: PropTypes.string,
+    receivePush: PropTypes.bool
   };
+
+  static mapStateToProps = state => ({...state.settings});
 
   render() {
     const lefty = {
       title: 'Назад',
       action: Actions.pop
     };
-    const photoContent = this.state.avatarSource ?
-      <Image source={this.state.avatarSource} style={styles.photo}/> :
+    const photoContent = this.props.avatar ?
+      <Image source={this.props.avatar} style={styles.photo}/> :
       <View style={[styles.photo, {backgroundColor: 'red'}]}/>;
 
     return (
@@ -32,12 +31,12 @@ class Settings extends React.Component {
         <TouchableWithoutFeedback onPress={this.onCameraPress}>
           {photoContent}
         </TouchableWithoutFeedback>
-        <TextInput placeholder="Кличка" value={this.state.nickname} {...inputStyle}
-                   onChangeText={(text) => this.setState({password: text})}/>
+        <TextInput placeholder="Кличка" value={this.props.nickname} {...inputStyle}
+                   onChangeText={this.props.setNickname}/>
         <View style={styles.switchHolder}>
           <Text style={commonStyles.text}>Receive push notifications</Text>
-          <Switch onValueChange={receivePush => this.setState({receivePush})}
-                  value={this.state.receivePush} />
+          <Switch onValueChange={this.props.setReceivePush}
+                  value={this.props.receivePush}/>
         </View>
       </WorkScreen>
     );
@@ -53,9 +52,6 @@ class Settings extends React.Component {
       else if (response.error) {
         console.log('ImagePickerManager Error: ', response.error);
       }
-      else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      }
       else {
         // You can display the image using either data:
         //const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
@@ -63,16 +59,13 @@ class Settings extends React.Component {
         //const source = {uri: response.uri.replace('file://', ''), isStatic: true};
         // uri (on android)
         const source = {uri: response.uri, isStatic: true};
-
-        this.setState({
-          avatarSource: source
-        });
+        this.props.setAvatar(source);
       }
     });
   }
 }
 
-export default connect(Settings.mapStateToProps)(Settings);
+export default connect(Settings.mapStateToProps, {setAvatar, setNickname, setReceivePush})(Settings);
 
 const cameraOptions = {
   title: 'Select Pet Avatar', // specify null or empty string to remove the title

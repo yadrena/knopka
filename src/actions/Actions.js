@@ -13,6 +13,10 @@ const userLoggedIn = createAction(ActionTypes.USER_LOGGED_IN);
 const wifiListed = createAction(ActionTypes.WIFI_LISTED);
 const gcmRegistered = createAction(ActionTypes.GCM_REGISTERED);
 
+export const setAvatar = createAction(ActionTypes.SET_AVATAR);
+export const setNickname = createAction(ActionTypes.SET_NICKNAME);
+export const setReceivePush = createAction(ActionTypes.SET_RECEIVE_PUSH);
+
 export function register(email, password) {
   return (dispatch, create) => {
     dispatch(setLoadingStatus(true));
