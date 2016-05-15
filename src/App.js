@@ -12,6 +12,7 @@ import {checkWifi, addNotification} from './actions/Actions';
 
 import SplashScreen from '@remobile/react-native-splashscreen';
 import GCM from 'react-native-gcm-push-notification';
+import Notification from 'react-native-system-notification';
 
 const RouterWithRedux = connect()(Router);
 const store = configureStore();

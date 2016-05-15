@@ -5,6 +5,7 @@ import * as ActionTypes from './ActionTypes';
 import {Alert} from 'react-native';
 import wifi from 'react-native-android-wifi';
 import GCM from 'react-native-gcm-push-notification';
+import {DeviceEventEmitter} from 'react-native';
 
 const firebase = new Firebase('https://knopka.firebaseio.com');
 
@@ -59,6 +60,9 @@ export function login(email, password) {
             console.log('GCM error:', data.error);
           }
           Actions.workScreens();
+        });
+        DeviceEventEmitter.addListener('sysNotificationClick', function(e) {
+          console.log('sysNotificationClick', e);
         });
         GCM.requestPermissions();
       })
