@@ -37,8 +37,8 @@ export default class Home extends Component {
 
   renderPressed = () => {
     return [
-      <CaesarLogo/>,
-      <Image key="img" source={require('../assets/dog.jpg')} />,
+      <CaesarLogo key="toplogo"/>,
+      <Image key='dog' source={require('../assets/dog.jpg')}/>,
       <Text key="txt" style={styles.label}>Ваш питомец соскучился!</Text>,
       <Button key="btn" onPress={this.onCancel} style={commonStyles.button}>OK</Button>
     ]

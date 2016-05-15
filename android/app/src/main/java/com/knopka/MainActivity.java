@@ -3,6 +3,9 @@ package com.knopka;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import com.facebook.react.ReactActivity;
+import com.oney.gcm.GcmPackage;
+import com.devstepbcn.wifi.AndroidWifiPackage;
+import com.remobile.splashscreen.RCTSplashScreenPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
@@ -10,6 +13,7 @@ import com.remobile.splashscreen.*;
 
 import java.util.Arrays;
 import java.util.List;
+import com.devstepbcn.wifi.AndroidWifiPackage;
 
 public class MainActivity extends ReactActivity {
     //BluetoothButtonListener listener;
@@ -62,6 +66,8 @@ public class MainActivity extends ReactActivity {
         //listener = new BluetoothButtonListener();
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new GcmPackage(),
+            new AndroidWifiPackage(),
             //new BluetoothShutterPackage(listener),
             new RCTSplashScreenPackage(this)
         );
