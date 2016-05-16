@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react'
 import {View, StyleSheet} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import WorkScreenHeader from '../components/WorkScreenHeader';
+import I18n from 'react-native-i18n';
 
 export default class WorkScreen extends React.Component {
   static propTypes = {
@@ -12,15 +13,16 @@ export default class WorkScreen extends React.Component {
 
   static defaultProps = {
     lefty: {
-      title: 'Назад',
+      title: '<',
       action: Actions.pop
     }
   };
 
   render() {
+    let {lefty, righty} = this.props;
     return (
       <View style={styles.container}>
-        <WorkScreenHeader lefty={this.props.lefty} righty={this.props.righty}/>
+        <WorkScreenHeader lefty={lefty} righty={righty}/>
         <View style={[styles.content, this.props.contentStyle]}>
           {this.props.children}
         </View>

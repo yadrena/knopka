@@ -5,6 +5,7 @@ import {login} from '../actions/Actions';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import CaesarLogo from '../components/CaesarLogo';
+import I18n from 'react-native-i18n';
 import {buttonStyle, linkStyle, loginScreensStyle, inputStyle} from '../styles/common';
 
 class Login extends Component {
@@ -23,16 +24,16 @@ class Login extends Component {
       <View style={loginScreensStyle.rootContainer}>
         <CaesarLogo/>
         <View style={loginScreensStyle.middleContainer}>
-          <TextInput placeholder="E-mail" keyboardType="email-address" value={this.state.email}
+          <TextInput placeholder={I18n.t('email')} keyboardType="email-address" value={this.state.email}
                      {...inputStyle}
                      onChangeText={(text) => this.setState({email: text})}/>
-          <TextInput placeholder="Password" secureTextEntry={true} value={this.state.password}
+          <TextInput placeholder={I18n.t('password')} secureTextEntry={true} value={this.state.password}
                      {...inputStyle}
                      onChangeText={(text) => this.setState({password: text})}/>
-          <Button onPress={this.onLogin} {...buttonStyle}>Log In</Button>
-          <Button onPress={Actions.register} {...linkStyle}>Register</Button>
+          <Button onPress={this.onLogin} {...buttonStyle}>{I18n.t('loginButton')}</Button>
+          <Button onPress={Actions.register} {...linkStyle}>{I18n.t('registerButton')}</Button>
         </View>
-        <Button onPress={Actions.login} {...linkStyle}>Restore password</Button>
+        <Button onPress={Actions.login} {...linkStyle}>{I18n.t('restorePassword')}</Button>
       </View>
     );
   }

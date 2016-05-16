@@ -6,6 +6,7 @@ import {setAvatar, setNickname, setReceivePush} from '../actions/Actions';
 import commonStyles, {inputStyle} from '../styles/common';
 import WorkScreen from './WorkScreen';
 import Avatar from '../components/Avatar';
+import I18n from 'react-native-i18n';
 
 const ImagePickerManager = NativeModules.ImagePickerManager;
 
@@ -22,10 +23,10 @@ class Settings extends React.Component {
     return (
       <WorkScreen>
         <Avatar avatar={this.props.avatar} onPress={this.onCameraPress}/>
-        <TextInput placeholder="Кличка" value={this.props.nickname} {...inputStyle}
+        <TextInput placeholder={I18n.t('nickname')} value={this.props.nickname} {...inputStyle}
                    onChangeText={this.props.setNickname}/>
         <View style={styles.switchHolder}>
-          <Text style={commonStyles.text}>Receive push notifications</Text>
+          <Text style={commonStyles.text}>{I18n.t('receivePush')}</Text>
           <Switch onValueChange={this.props.setReceivePush}
                   value={this.props.receivePush}/>
         </View>
@@ -59,10 +60,10 @@ class Settings extends React.Component {
 export default connect(Settings.mapStateToProps, {setAvatar, setNickname, setReceivePush})(Settings);
 
 const cameraOptions = {
-  title: 'Select Pet Avatar', // specify null or empty string to remove the title
-  cancelButtonTitle: 'Cancel',
-  takePhotoButtonTitle: 'Take Photo...', // specify null or empty string to remove this button
-  chooseFromLibraryButtonTitle: 'Choose from Library...', // specify null or empty string to remove this button
+  title: I18n.t('cameraTitle'), // specify null or empty string to remove the title
+  cancelButtonTitle: I18n.t('cameraCancel'),
+  takePhotoButtonTitle: I18n.t('cameraTakePhoto'), // specify null or empty string to remove this button
+  chooseFromLibraryButtonTitle: I18n.t('cameraLibrary'), // specify null or empty string to remove this button
   cameraType: 'front', // 'front' or 'back'
   mediaType: 'photo', // 'photo' or 'video'
   maxWidth: 500, // photos only

@@ -16,6 +16,7 @@ import java.util.List;
 import com.devstepbcn.wifi.AndroidWifiPackage;
 import com.imagepicker.ImagePickerPackage;
 import io.neson.react.notification.NotificationPackage;
+import com.i18n.reactnativei18n.ReactNativeI18n;
 
 public class MainActivity extends ReactActivity {
     //BluetoothButtonListener listener;
@@ -71,6 +72,7 @@ public class MainActivity extends ReactActivity {
             new GcmPackage(),
             new AndroidWifiPackage(),
             new ImagePickerPackage(),
+            new ReactNativeI18n(),
             new NotificationPackage(this),
                 //new BluetoothShutterPackage(listener),
             new RCTSplashScreenPackage(this)

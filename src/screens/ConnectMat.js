@@ -6,6 +6,7 @@ import commonStyle, {buttonStyle, inputStyle} from '../styles/common';
 import {connectToMat} from '../actions/Actions';
 import WorkScreen from './WorkScreen';
 import BusyIndicator from '../components/BusyIndicator';
+import I18n from 'react-native-i18n';
 
 class ConnectMat extends React.Component {
   static propTypes = {
@@ -29,20 +30,20 @@ class ConnectMat extends React.Component {
     const wifis = wifiLoaded ? wifiList.map(v => <Picker.Item key={v.ssid} label={v.ssid} value={v}/>) : null;
     return (
       <WorkScreen>
-        <Text style={commonStyle.text}>Выберите домашнюю сеть</Text>
-        {!wifiLoaded && <BusyIndicator message="Scanning wifi networks..."/>}
+        <Text style={commonStyle.text}>{I18n.t('wifiLookup')}</Text>
+        {!wifiLoaded && <BusyIndicator message={I18n.t('wifiScan')}/>}
         {wifiLoaded &&
-        <Picker selectedValue={this.state.wifi} prompt="Выберите домашнюю сеть" mode="dialog"
+        <Picker selectedValue={this.state.wifi} prompt={I18n.t('wifiLookup')} mode="dialog"
                 onValueChange={wifi => this.setState({wifi})} style={styles.picker}>
           {wifis}
         </Picker>
         }
         {wifiLoaded &&
-        <TextInput placeholder="Password" secureTextEntry={true} value={this.state.password}
+        <TextInput placeholder={I18n.t('password')} secureTextEntry={true} value={this.state.password}
           {...inputStyle}
                    onChangeText={password => this.setState({password})}/>
         }
-        <Button onPress={this.onConnectPressed} {...buttonStyle}>Connect</Button>
+        <Button onPress={this.onConnectPressed} {...buttonStyle}>{I18n.t('connect')}</Button>
       </WorkScreen>
     );
   }

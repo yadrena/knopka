@@ -6,6 +6,7 @@ import {popNotification} from '../actions/Actions';
 import commonStyles from '../styles/common';
 import WorkScreen from './WorkScreen';
 import NotificationCard from '../components/NotificationCard';
+import I18n from 'react-native-i18n';
 import _ from 'lodash';
 
 class Home extends Component {
@@ -25,7 +26,7 @@ class Home extends Component {
   render() {
     const notifications = this.props.notifications;
     const righty = {
-      title: 'Настройки',
+      title: I18n.t('settings'),
       action: Actions.settings
     };
     if (notifications.length > 0)
@@ -65,14 +66,11 @@ class Home extends Component {
     return (
       <WorkScreen righty={righty}>
         <Text style={[commonStyles.text, styles.label]}>
-          {'Скоро тут появятся\n сообщения от вашего\n питомца.'}
+          {I18n.t('homeEmptyUpper')}
         </Text>
         <Image key='dog' source={require('../assets/dog.jpg')}/>
         <Text style={[commonStyles.text, styles.label]}>
-          {'...а пока можно перейти\n' +
-          'в Настройки, чтобы\n' +
-          'указать его кличку\n' +
-          'и добавить фотографию.'}
+          {I18n.t('homeEmptyLower')}
         </Text>
       </WorkScreen>
     );
