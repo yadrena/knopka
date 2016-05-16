@@ -55,6 +55,10 @@ export function login(email, password) {
         GCM.addEventListener('register', function(data){
           if(!data.error){
             dispatch(gcmRegistered(data.registrationToken));
+            firebase.child("users").child(userData.uid).set({
+              email: email,
+              gcmToken: data.registrationToken
+            });
           }
           else {
             Alert.alert('GCM Error', 'Failed to register token: ' + data.error);
