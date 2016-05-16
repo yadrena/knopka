@@ -16,7 +16,7 @@ export default {
   cameraTitle: 'Выберите фото собаки',
   cameraCancel: 'Отмена',
   cameraTakePhoto: 'Сфотографировать...',
-  cameraLibrary: 'Выберите из библиотеки...',
+  cameraLibrary: 'Выбрать из библиотеки...',
   settings: 'Настройки',
   homeEmptyUpper: 'Скоро тут появятся\n сообщения от вашего\n питомца.',
   homeEmptyLower: '...а пока можно перейти\nв Настройки, чтобы\nуказать его кличку\nи добавить фотографию.'

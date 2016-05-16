@@ -2,6 +2,7 @@ import I18n from 'react-native-i18n';
 import ru from './ru_RU';
 import en from './en_US';
 
+I18n.defaultLocale = "ru-RU";
 I18n.fallbacks = true;
 
 I18n.translations = {
@@ -9,6 +10,6 @@ I18n.translations = {
   'en-US': en,
   'ru': ru,
   'ru-RU': ru
-};
+}
 
-console.log('I18n', I18n.translations);
+export default I18n;

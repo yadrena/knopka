@@ -1,8 +1,10 @@
+'use strict';
+
 import React, {PropTypes} from 'react'
 import {View, StyleSheet} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import WorkScreenHeader from '../components/WorkScreenHeader';
-import I18n from 'react-native-i18n';
+import I18n from '../i18n/i18n';
 
 export default class WorkScreen extends React.Component {
   static propTypes = {
@@ -13,7 +15,7 @@ export default class WorkScreen extends React.Component {
 
   static defaultProps = {
     lefty: {
-      title: '<',
+      title: I18n.t('backButton'),
       action: Actions.pop
     }
   };

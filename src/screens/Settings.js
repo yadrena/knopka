@@ -6,7 +6,7 @@ import {setAvatar, setNickname, setReceivePush} from '../actions/Actions';
 import commonStyles, {inputStyle} from '../styles/common';
 import WorkScreen from './WorkScreen';
 import Avatar from '../components/Avatar';
-import I18n from 'react-native-i18n';
+import I18n from '../i18n/i18n';
 
 const ImagePickerManager = NativeModules.ImagePickerManager;
 
