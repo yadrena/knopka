@@ -14,7 +14,7 @@ class WifiManual extends React.Component {
 
   render() {
     return (
-      <WorkScreen>
+      <WorkScreen lefty={null}>
         <Text style={[commonStyle.text, {marginBottom: 48}]}>
           {I18n.t('wifiManual')}
         </Text>
