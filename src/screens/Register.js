@@ -16,7 +16,7 @@ class Register extends Component {
   };
 
   state = {
-    email: 'kaospostage+2@gmail.com',
+    email: 'kaospostagez@gmail.com',
     password: 'qwerty'
   };
 

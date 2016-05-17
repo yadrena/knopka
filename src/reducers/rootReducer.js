@@ -13,6 +13,9 @@ export default combineReducers({
   settings,
   notifications,
   wifis: handleActions({
-    [ActionTypes.WIFI_LISTED]: (state = {loaded: false, list: []}, {payload}) => ({loaded: true, list: payload})},
-    {loaded: false, list: []})
+    [ActionTypes.WIFI_REFRESH]: (state, {payload}) => ({loaded: false, list: [], error: ''}),
+    [ActionTypes.WIFI_LISTED]: (state, {payload}) => ({loaded: true, list: payload, error: ''}),
+    [ActionTypes.WIFI_LIST_FAILED]: (state, {payload}) => ({loaded: false, list: [], error: payload}) },
+    {loaded: false, list: [], error: ''}
+  )
 });

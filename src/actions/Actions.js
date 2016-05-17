@@ -13,6 +13,7 @@ const firebase = new Firebase('https://knopka.firebaseio.com');
 const setLoadingStatus = createAction(ActionTypes.LOADING);
 const userLoggedIn = createAction(ActionTypes.USER_LOGGED_IN);
 const wifiListed = createAction(ActionTypes.WIFI_LISTED);
+const wifiListFailed = createAction(ActionTypes.WIFI_LIST_FAILED);
 const gcmRegistered = createAction(ActionTypes.GCM_REGISTERED);
 
 export const setAvatar = createAction(ActionTypes.SET_AVATAR);
@@ -80,6 +81,7 @@ export function login(email, password) {
 
 export function checkWifi(){
   return (dispatch, getState) => {
+    dispatch({type: ActionTypes.WIFI_REFRESH});
     wifi.isEnabled((isEnabled)=>{
       if (isEnabled){
         wifi.loadWifiList((wifiStringList) => {
@@ -87,10 +89,12 @@ export function checkWifi(){
             dispatch(wifiListed(wifiArray));
           },
           (error) => {
-            console.log(error);
+            dispatch(wifiListFailed(I18n.t('wifiListFailedMessage')));
+            console.log('Wifi lis error: ', error);
           }
         );
-      }else{
+      } else {
+        dispatch(wifiListFailed(I18n.t('wifiDisabledMessage')));
         console.log("wifi service is disabled");
       }
     });

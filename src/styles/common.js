@@ -29,6 +29,9 @@ const components = StyleSheet.create({
   text: {
     color: 'white'
   },
+  error: {
+    color: 'red'
+  },
   avatar: {
     width: 120,
     height: 120,
