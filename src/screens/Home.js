@@ -49,7 +49,7 @@ class Home extends Component {
       );
     }
     return (
-      <WorkScreen righty={righty} contentStyle={{justifyContent: 'flex-start'}}>
+      <WorkScreen righty={righty} lefty={null} contentStyle={{justifyContent: 'flex-start'}}>
         <View style={styles.stack}>
           {content}
         </View>
@@ -64,7 +64,7 @@ class Home extends Component {
   renderPlaceholder = (righty) => {
 
     return (
-      <WorkScreen righty={righty}>
+      <WorkScreen righty={righty} lefty={null}>
         <Text style={[commonStyles.text, styles.label]}>
           {I18n.t('homeEmptyUpper')}
         </Text>
