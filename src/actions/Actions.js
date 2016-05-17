@@ -125,3 +125,13 @@ export function connectToMat({ssid, bssid}, password ){
     Actions.home();
   };
 }
+
+export function hardwareBack() {
+  return (dispatch, getState) => {
+    const scene = getState().routes.scene.sceneKey;
+    //We cannot just pop all the time, because react-native-router-flux and react-native versions currently do not work well together
+    if (scene === 'register' || scene === 'connectMat' || scene === 'settings'){
+      Actions.pop();
+    }
+  }
+}

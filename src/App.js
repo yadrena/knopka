@@ -9,7 +9,7 @@ import Home from "./screens/Home";
 import Settings from "./screens/Settings";
 import WifiManual from "./screens/WifiManual";
 import ConnectMat from "./screens/ConnectMat";
-import {checkWifi, addNotification} from './actions/Actions';
+import {checkWifi, addNotification, hardwareBack} from './actions/Actions';
 
 import SplashScreen from '@remobile/react-native-splashscreen';
 import GCM from 'react-native-gcm-push-notification';
@@ -26,7 +26,7 @@ export default class App extends Component {
 
   componentDidMount() {
     BackAndroid.addEventListener('hardwareBackPress', function() {
-      //Ignore back button
+      store.dispatch(hardwareBack());
       return true;
     });
 
@@ -51,7 +51,7 @@ export default class App extends Component {
         <RouterWithRedux>
           <Scene key="root" type="jump">
             <Scene key="authScreens" hideNavBar={true}>
-              <Scene key="login" component={Login}/>
+              <Scene key="login" component={Login} initial={true}/>
               <Scene key="register" component={Register} type="push"/>
             </Scene>
             <Scene key="workScreens" hideNavBar={true} type="push" >
