@@ -1,31 +1,20 @@
-import React, {Component} from 'react';
-import {AppRegistry,} from 'react-native';
-import App from './src/App';
+import React from 'react';
+import {AppRegistry} from 'react-native';
+
 import GCM from 'react-native-gcm-push-notification';
 import Notification from 'react-native-system-notification';
 
-class knopka extends Component {
-  render() {
-    return (
-      <App/>
-    );
-  }
-}
-
 if (GCM.launchNotification) {
-  console.log('WTF???');
   var notification = GCM.launchNotification;
+  console.log('Before entering function:', notification);
   var info = JSON.parse(notification.info);
   Notification.create({
     subject: info.subject,
     message: info.message
   });
-  Notification.create({
-    subject: info.subject,
-    message: info.message
-  });
-  GCM.stopService();
+  //GCM.stopService();
 }
 else {
+  const knopka = require('./src/App').default;
   AppRegistry.registerComponent('knopka', () => knopka);
 }

@@ -25,24 +25,18 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    BackAndroid.addEventListener('hardwareBackPress', function() {
-      store.dispatch(hardwareBack());
-      return true;
-    });
+    BackAndroid.addEventListener('hardwareBackPress', this.handleAndroidBackButton);
 
     store.dispatch(checkWifi());
     setTimeout( () => SplashScreen.hide(), 1000);
-    GCM.addEventListener('notification', function(notification){
-      var info = JSON.parse(notification.data.info);
-      console.log('Received notification:', info, GCM.isInForeground);
-      store.dispatch(addNotification(info));
-      if (!GCM.isInForeground) {
-        Notification.create({
-          subject: info.subject,
-          message: info.message
-        });
-      }
-    });
+    
+    GCM.addEventListener('notification', this.handleNotification);
+    Notification.addListener('press', this.handleNotificationPress);
+  }
+  
+  componentWillUnmount(){
+    Notification.removeAllListeners('press');
+    GCM.removeEventListener('notification', this.handleNotification);
   }
 
   render() {
@@ -64,5 +58,28 @@ export default class App extends Component {
         </RouterWithRedux>
       </Provider>
     );
+  }
+
+  handleNotification = (notification) => {
+    var info = JSON.parse(notification.data.info);
+    console.log('Received notification:', info, GCM.isInForeground);
+    store.dispatch(addNotification(info));
+    if (!GCM.isInForeground) {
+      Notification.create({
+        subject: info.subject,
+        message: info.message
+      });
+    }
+  };
+
+  handleNotificationPress = (e) => {
+    //{action: 'DEFAULT', payload: {}}
+    Notification.clearAll();
+    console.log('Notification press', e);
+  };
+
+  handleAndroidBackButton = () => {
+    store.dispatch(hardwareBack());
+    return true;
   }
 }

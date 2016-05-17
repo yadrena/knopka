@@ -6,7 +6,6 @@ import {Alert} from 'react-native';
 import wifi from 'react-native-android-wifi';
 
 import GCM from 'react-native-gcm-push-notification';
-import {DeviceEventEmitter} from 'react-native';
 
 const firebase = new Firebase('https://knopka.firebaseio.com');
 
@@ -53,8 +52,9 @@ export function login(email, password) {
         dispatch(setLoadingStatus(false));
         //uid : "1ada9111-ea79-41fa-821c-c6b698e1de70"
         dispatch(userLoggedIn(userData));
-        GCM.addEventListener('register', function(data){
+        const regListener = function(data){
           if(!data.error){
+            console.log('Received gcm token:', data.registrationToken);
             dispatch(gcmRegistered(data.registrationToken));
             firebase.child("users").child(userData.uid).set({
               email: email,
@@ -65,11 +65,10 @@ export function login(email, password) {
             Alert.alert('GCM Error', 'Failed to register token: ' + data.error);
             console.log('GCM error:', data.error);
           }
+          GCM.removeEventListener('register', regListener);
           Actions.workScreens();
-        });
-        DeviceEventEmitter.addListener('sysNotificationClick', function(e) {
-          console.log('sysNotificationClick', e);
-        });
+        };
+        GCM.addEventListener('register', regListener);
         GCM.requestPermissions();
       })
       .catch(error => {
