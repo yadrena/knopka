@@ -22,9 +22,9 @@ export default class WorkScreen extends React.Component {
   render() {
     let {lefty, righty} = this.props;
     return (
-      <View style={workScreenStyle}>
+      <View style={workScreenStyle.container}>
         <WorkScreenHeader lefty={lefty} righty={righty}/>
-        <View style={[styles.content, this.props.contentStyle]}>
+        <View style={[workScreenStyle.content, this.props.contentStyle]}>
           {this.props.children}
         </View>
       </View>
