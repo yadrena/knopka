@@ -15,8 +15,8 @@ class Login extends Component {
   };
 
   state = {
-    email: 'kaospostagez@gmail.com',
-    password: 'qwerty'
+    email: __DEV__ ? 'kaospostagez@gmail.com' : '',
+    password: __DEV__ ? 'qwerty' : ''
   };
 
   render() {

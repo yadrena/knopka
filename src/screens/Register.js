@@ -15,9 +15,10 @@ class Register extends Component {
     register: PropTypes.func
   };
 
+  //__DEV__ does not work with HMR and __DEV__ = false, at least in react native 0.25
   state = {
-    email: 'kaospostagez@gmail.com',
-    password: 'qwerty'
+    email: __DEV__ ? 'kaospostagez@gmail.com' : '',
+    password: __DEV__ ? 'qwerty' : ''
   };
 
   render() {
