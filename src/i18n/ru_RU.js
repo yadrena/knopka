@@ -5,6 +5,8 @@ export default {
   connect: 'Подключиться',
   email: 'e-mail',
   loginButton: 'Войти',
+  regThanksLink: 'Вход',
+  regThanks: 'Спасибо за регистрацию!',
   registerButton: 'Зарегистрироваться',
   restorePassword: 'Восстановить пароль',
   alreadyRegistered: 'Уже зарегистрирован',

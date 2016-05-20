@@ -26,7 +26,7 @@ export function register(email, password) {
     dispatch(setLoadingStatus(true));
     return firebase.createUser({email, password})
       .then( () =>
-        dispatch(login(email, password))
+        dispatch(login(email, password, true))
       )
       .catch(error => {
         dispatch(setLoadingStatus(false));
@@ -44,7 +44,7 @@ export function register(email, password) {
   }
 }
 
-export function login(email, password) {
+export function login(email, password, thanks = false) {
   return (dispatch, create) => {
     dispatch(setLoadingStatus(true));
     return firebase.authWithPassword({email, password})
@@ -66,7 +66,10 @@ export function login(email, password) {
             console.log('GCM error:', data.error);
           }
           GCM.removeEventListener('register', regListener);
-          Actions.workScreens();
+          if (thanks)
+            Actions.thanks();
+          else
+            Actions.workScreens();
         };
         GCM.addEventListener('register', regListener);
         GCM.requestPermissions();

@@ -5,6 +5,7 @@ import { Provider, connect } from 'react-redux';
 import configureStore from './store/configureStore';
 import Login from "./screens/Login";
 import Register from "./screens/Register";
+import RegThanks from "./screens/RegThanks";
 import Home from "./screens/Home";
 import Settings from "./screens/Settings";
 import WifiManual from "./screens/WifiManual";
@@ -47,6 +48,7 @@ export default class App extends Component {
             <Scene key="authScreens" hideNavBar={true}>
               <Scene key="login" component={Login} initial={true}/>
               <Scene key="register" component={Register} type="push"/>
+              <Scene key="thanks" component={RegThanks} type="push"/>
             </Scene>
             <Scene key="workScreens" hideNavBar={true} type="push" >
               <Scene key="wifiManual" component={WifiManual} initial={true}/>

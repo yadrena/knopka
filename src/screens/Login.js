@@ -34,7 +34,7 @@ class Login extends Component {
           <Button onPress={this.onLogin} {...buttonStyle}>{I18n.t('loginButton')}</Button>
           <Button onPress={Actions.login} {...linkStyle}>{I18n.t('restorePassword')}</Button>
         </View>
-          <Button onPress={Actions.register} {...linkStyle}>{I18n.t('registerButton')}</Button>
+        <Button onPress={Actions.register} {...linkStyle}>{I18n.t('registerButton')}</Button>
       </View>
     );
   }

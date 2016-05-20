@@ -5,6 +5,8 @@ export default {
   connect: 'Connect',
   email: 'e-mail',
   loginButton: 'Login',
+  regThanksLink: 'Continue',
+  regThanks: 'Thank you for registering!',
   registerButton: 'Register',
   restorePassword: 'Restore password',
   alreadyRegistered: 'Already registered',
@@ -19,5 +21,8 @@ export default {
   cameraLibrary: 'Choose from Library...',
   settings: 'Settings',
   homeEmptyUpper: 'Your pet is not missing you',
-  homeEmptyLower: 'Meanwhile you can change your settings'
+  homeEmptyLower: 'Meanwhile you can change your settings',
+  noWifis: 'No hotspots were found',
+  wifiListFailedMessage: 'Error while scanning for available hotspots',
+  wifiDisabledMessage: 'Turn on wi-fi to continue'
 };
