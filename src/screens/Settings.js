@@ -84,11 +84,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  photo: {
-    width: 120,
-    height: 120,
-    borderRadius: 60
-  },
   switchHolder: {
     flexDirection: 'row',
     alignSelf: 'stretch',

@@ -22,7 +22,7 @@ class Login extends Component {
   render() {
     return (
       <View style={loginScreensStyle.rootContainer}>
-        <CaesarLogo/>
+        <CaesarLogo big={true}/>
         <View style={loginScreensStyle.middleContainer}>
           <TextInput placeholder={I18n.t('email')} keyboardType="email-address" value={this.state.email}
                      {...inputStyle}

@@ -68,7 +68,7 @@ class Home extends Component {
         <Text style={[commonStyles.text, styles.label]}>
           {I18n.t('homeEmptyUpper')}
         </Text>
-        <Image key='dog' source={require('../assets/dog.jpg')}/>
+        <Image key='dog' source={require('../assets/dog.png')}/>
         <Text style={[commonStyles.text, styles.label]}>
           {I18n.t('homeEmptyLower')}
         </Text>

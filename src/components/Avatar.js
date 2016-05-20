@@ -9,10 +9,33 @@ export default class Avatar extends React.Component {
   };
 
   render() {
+    const {avatar, onPress} = this.props;
     return (
-      <TouchableWithoutFeedback onPress={this.props.onPress}>
-        <Image source={this.props.avatar || require('../assets/dog.jpg')} style={commonStyles.avatar}/>
+      <TouchableWithoutFeedback onPress={onPress}>
+        {avatar ? this.renderAvatar(avatar) : this.renderPlaceholder()}
       </TouchableWithoutFeedback>
     );
   }
+
+  renderAvatar = (avatar) => {
+    return (
+      <Image source={avatar} style={commonStyles.avatar}/>
+    );
+  };
+
+  renderPlaceholder = () => {
+    return (
+      <View style={[commonStyles.avatar, styles.placeholder]}>
+        <Image source={require('../assets/camera.png')} style={{width: 50, height: 35}}/>
+      </View>
+    );
+  }
 }
+
+const styles = StyleSheet.create({
+  placeholder: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#1c1c1c'
+  }
+});
