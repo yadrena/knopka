@@ -4,6 +4,7 @@ export default {
   password: 'Пароль',
   connect: 'Подключиться',
   email: 'e-mail',
+  send: 'Отправить',
   loginButton: 'Войти',
   regThanksLink: 'Вход',
   regThanks: 'Спасибо за регистрацию!',

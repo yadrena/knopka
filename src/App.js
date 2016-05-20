@@ -6,6 +6,7 @@ import configureStore from './store/configureStore';
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import RegThanks from "./screens/RegThanks";
+import RequestRecover from "./screens/RequestRecover";
 import Home from "./screens/Home";
 import Settings from "./screens/Settings";
 import WifiManual from "./screens/WifiManual";
@@ -49,6 +50,7 @@ export default class App extends Component {
               <Scene key="login" component={Login} initial={true}/>
               <Scene key="register" component={Register} type="push"/>
               <Scene key="thanks" component={RegThanks} type="push"/>
+              <Scene key="reqRecover" component={RequestRecover} type="push"/>
             </Scene>
             <Scene key="workScreens" hideNavBar={true} type="push" >
               <Scene key="wifiManual" component={WifiManual} initial={true}/>

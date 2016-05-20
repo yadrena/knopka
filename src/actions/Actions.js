@@ -81,6 +81,10 @@ export function login(email, password, thanks = false) {
   }
 }
 
+export function requestRecover(email) {
+  
+}
+
 export function checkWifi(){
   return (dispatch, getState) => {
     dispatch({type: ActionTypes.WIFI_REFRESH});

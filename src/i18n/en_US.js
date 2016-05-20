@@ -4,6 +4,7 @@ export default {
   password: 'Password',
   connect: 'Connect',
   email: 'e-mail',
+  send: 'Send',
   loginButton: 'Login',
   regThanksLink: 'Continue',
   regThanks: 'Thank you for registering!',
