@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BackAndroid} from 'react-native';
+import {BackAndroid, Linking} from 'react-native';
 import {Actions, Scene, Router} from 'react-native-router-flux';
 import { Provider, connect } from 'react-redux';
 import configureStore from './store/configureStore';
@@ -35,6 +35,12 @@ export default class App extends Component {
     
     GCM.addEventListener('notification', this.handleNotification);
     Notification.addListener('press', this.handleNotificationPress);
+    //adb shell am start -W -a android.intent.action.VIEW -d "cesar://recover" com.knopka
+    Linking.getInitialURL()
+      .then(url => {
+        if (url) { console.log('Initial url is: ' + url); }
+      })
+      .catch(err => console.error('Deep linking error', err));
   }
   
   componentWillUnmount(){
