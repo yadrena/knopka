@@ -30,10 +30,11 @@ class Login extends Component {
           <TextInput placeholder={I18n.t('password')} secureTextEntry={true} value={this.state.password}
                      {...inputStyle}
                      onChangeText={(text) => this.setState({password: text})}/>
+          <View style={{height: 8}}/>
           <Button onPress={this.onLogin} {...buttonStyle}>{I18n.t('loginButton')}</Button>
-          <Button onPress={Actions.register} {...linkStyle}>{I18n.t('registerButton')}</Button>
+          <Button onPress={Actions.login} {...linkStyle}>{I18n.t('restorePassword')}</Button>
         </View>
-        <Button onPress={Actions.login} {...linkStyle}>{I18n.t('restorePassword')}</Button>
+          <Button onPress={Actions.register} {...linkStyle}>{I18n.t('registerButton')}</Button>
       </View>
     );
   }

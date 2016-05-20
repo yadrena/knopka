@@ -6,7 +6,7 @@ export default {
   email: 'e-mail',
   loginButton: 'Войти',
   registerButton: 'Зарегистрироваться',
-  restorePassword: 'Восстановаить пароль',
+  restorePassword: 'Восстановить пароль',
   alreadyRegistered: 'Уже зарегистрирован',
   backButton: 'Назад',
   next: 'Далее',
