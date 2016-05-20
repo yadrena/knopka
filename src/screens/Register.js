@@ -6,7 +6,7 @@ import {Actions} from 'react-native-router-flux';
 import CaesarLogo from '../components/CaesarLogo';
 import {buttonStyle, linkStyle, loginScreensStyle, inputStyle} from '../styles/common';
 
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {View, TextInput} from 'react-native';
 import I18n from 'react-native-i18n';
 
 class Register extends Component {
@@ -24,7 +24,7 @@ class Register extends Component {
   render() {
     return (
       <View style={loginScreensStyle.rootContainer}>
-        <CaesarLogo/>
+        <CaesarLogo big={true}/>
         <View style={loginScreensStyle.middleContainer}>
           <TextInput placeholder={I18n.t('email')} keyboardType="email-address" value={this.state.email}
             {...inputStyle}
@@ -45,12 +45,3 @@ class Register extends Component {
 }
 
 export default connect(undefined, {register})(Register);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
