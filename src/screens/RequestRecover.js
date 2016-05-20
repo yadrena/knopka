@@ -21,13 +21,16 @@ class RequestRecover extends React.Component {
     return (
       <View style={loginScreensStyle.rootContainer}>
         <CaesarLogo big={true}/>
-        <Text style={commonStyles.header}>
-          {I18n.t('restorePassword')}
-        </Text>
-        <TextInput placeholder={I18n.t('email')} keyboardType="email-address" value={this.state.email}
-          {...inputStyle}
-                   onChangeText={(text) => this.setState({email: text})}/>
-        <Button onPress={this.props.requestRecover} {...buttonStyle}>{I18n.t('send')}</Button>
+          <View style={loginScreensStyle.middleContainer}>
+          <Text style={commonStyles.header}>
+            {I18n.t('restorePassword')}
+          </Text>
+          <TextInput placeholder={I18n.t('email')} keyboardType="email-address" value={this.state.email}
+            {...inputStyle}
+                     onChangeText={(text) => this.setState({email: text})}/>
+          <Button onPress={() => this.props.requestRecover(this.state.email)} {...buttonStyle}>{I18n.t('send')}</Button>
+          <Button onPress={Actions.changePassword} {...linkStyle}>{I18n.t('changePasswordButton')}</Button>
+        </View>
         <Button onPress={Actions.pop} {...linkStyle}>{I18n.t('loginButton')}</Button>
       </View>
     );

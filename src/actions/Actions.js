@@ -82,7 +82,44 @@ export function login(email, password, thanks = false) {
 }
 
 export function requestRecover(email) {
-  
+  return (dispatch, getState) => {
+    console.log('Requesting password recover', email);
+    return firebase.resetPassword({email})
+      .then(() => {
+        console.log('Reset successful');
+        Actions.changePassword();
+      })
+      .catch(error => {
+        switch (error.code) {
+          case "INVALID_USER":
+            Alert.alert('Password recovery failed', 'The specified user account does not exist');
+            break;
+          default:
+            Alert.alert('Password recovery failed', error);
+        }
+      });
+  }
+}
+
+export function changePassword(email, oldPassword, newPassword) {
+  return (dispatch, getState) => {
+    console.log('Requesting password change', email, oldPassword, newPassword);
+    return dispatch(login(email, oldPassword))
+      .then(() => firebase.changePassword({email, oldPassword, newPassword}))
+      .then(() => Alert.alert('Success', 'The password has been successfully changed!'))
+      .catch(error => {
+        switch (error.code) {
+          case "INVALID_PASSWORD":
+            Alert.alert('Failed to change password', 'The specified user account password is incorrect');
+            break;
+          case "INVALID_USER":
+            Alert.alert('Failed to change password', 'The specified user account does not exist');
+            break;
+          default:
+            Alert.alert('Failed to change password', error);
+        }
+      });
+  };
 }
 
 export function checkWifi(){

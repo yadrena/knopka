@@ -10,6 +10,7 @@ export default {
   regThanks: 'Thank you for registering!',
   registerButton: 'Register',
   restorePassword: 'Restore password',
+  changePasswordButton: 'Change password',
   alreadyRegistered: 'Already registered',
   backButton: 'Back',
   next: 'Next',

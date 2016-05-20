@@ -16,7 +16,7 @@ class Login extends Component {
 
   state = {
     email: __DEV__ ? 'kaospostage+2@gmail.com' : '',
-    password: __DEV__ ? 'qwerty' : ''
+    password: __DEV__ ? 'asdfgh' : ''
   };
 
   render() {
