@@ -1,5 +1,13 @@
 import {StyleSheet } from 'react-native';
 
+const BACKGROUND_COLOR = '#101010';
+const FONT_FAMILY = 'cesar';
+const DARK_GRAY = '#535353';
+const LIGHT_GRAY = '#a6a6a6';
+const TEXT_BLACK = '#0f0f0f';
+const TEXT_WHITE = '#ffffff';
+const TEXT_ERROR = '#ff0000';
+
 const components = StyleSheet.create({
   button: {
     height: 48,
@@ -9,28 +17,37 @@ const components = StyleSheet.create({
     backgroundColor: '#ffffff'
   },
   buttonText: {
-    color: 'black'
+    fontFamily: FONT_FAMILY,
+    color: TEXT_BLACK
   },
   buttonLink: {
     height: 48,
-    margin: 8
+    margin: 8,
+    borderWidth: 0
   },
   linkText: {
-    color: 'white'
+    fontFamily: FONT_FAMILY,
+    color: LIGHT_GRAY
   },
   input: {
-    color: 'white',
+    color: LIGHT_GRAY,
+    fontSize: 18,
+    fontFamily: FONT_FAMILY,
+    textAlign: 'center',
     margin: 8
   },
   header: {
-    color: 'white',
+    color: TEXT_WHITE,
+    fontFamily: FONT_FAMILY,
     fontSize: 24
   },
   text: {
-    color: 'white'
+    color: TEXT_WHITE,
+    fontFamily: FONT_FAMILY
   },
   error: {
-    color: 'red'
+    fontFamily: FONT_FAMILY,
+    color: TEXT_ERROR
   },
   avatar: {
     width: 120,
@@ -51,8 +68,8 @@ export const linkStyle = {
 
 export const inputStyle = {
   style: components.input,
-  placeholderTextColor: 'white',
-  underlineColorAndroid: 'white'
+  placeholderTextColor: DARK_GRAY,
+  underlineColorAndroid: DARK_GRAY
 };
 
 export const loginScreensStyle = StyleSheet.create({
@@ -60,12 +77,28 @@ export const loginScreensStyle = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 20,
-    backgroundColor: 'black'
+    paddingTop: 16,
+    paddingHorizontal: 32,
+    paddingBottom: 16,
+    backgroundColor: BACKGROUND_COLOR
   },
   middleContainer: {
     alignItems: 'center',
     justifyContent: 'center'
+  }
+});
+
+export const workScreenStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: BACKGROUND_COLOR,
+    alignItems: 'stretch'
+  },
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24
   }
 });
 

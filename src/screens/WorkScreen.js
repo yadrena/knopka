@@ -1,9 +1,8 @@
-'use strict';
-
 import React, {PropTypes} from 'react'
 import {View, StyleSheet} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import WorkScreenHeader from '../components/WorkScreenHeader';
+import {workScreenStyle} from '../styles/common';
 import I18n from '../i18n/i18n';
 
 export default class WorkScreen extends React.Component {
@@ -23,7 +22,7 @@ export default class WorkScreen extends React.Component {
   render() {
     let {lefty, righty} = this.props;
     return (
-      <View style={styles.container}>
+      <View style={workScreenStyle}>
         <WorkScreenHeader lefty={lefty} righty={righty}/>
         <View style={[styles.content, this.props.contentStyle]}>
           {this.props.children}
@@ -33,16 +32,4 @@ export default class WorkScreen extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-    alignItems: 'stretch'
-  },
-  content: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 24
-  }
-});
+
