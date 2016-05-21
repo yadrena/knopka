@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "tron": "node_modules/.bin/reactotron"
   },
   "dependencies": {
     "@remobile/react-native-splashscreen": "^1.0.3",
@@ -28,5 +29,8 @@
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
     "seamless-immutable": "^6.1.0"
+  },
+  "devDependencies": {
+    "reactotron": "^0.6.1"
   }
 }

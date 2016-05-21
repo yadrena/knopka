@@ -17,7 +17,7 @@ class Register extends Component {
 
   //__DEV__ does not work with HMR and __DEV__ = false, at least in react native 0.25
   state = {
-    email: __DEV__ ? 'kaospostagez@gmail.com' : '',
+    email: __DEV__ ? 'me@ya.ru' : '',
     password: __DEV__ ? 'qwerty' : ''
   };
 

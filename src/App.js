@@ -11,6 +11,7 @@ import ChangePassword from "./screens/ChangePassword";
 import Home from "./screens/Home";
 import Settings from "./screens/Settings";
 import ConnectMat from "./screens/ConnectMat";
+import Reactotron from 'reactotron';
 import {checkWifi, addNotification, hardwareBack, setLastInitialURL} from './actions/Actions';
 
 import SplashScreen from '@remobile/react-native-splashscreen';
@@ -27,6 +28,7 @@ export default class App extends Component {
   splashHidden = false;
 
   componentDidMount() {
+    Reactotron.log('App mounted ' + GCM.launchNotification);
     BackAndroid.addEventListener('hardwareBackPress', this.handleAndroidBackButton);
 
     store.dispatch(checkWifi());
@@ -51,11 +53,13 @@ export default class App extends Component {
       .catch(err => console.error('Deep linking error', err));
 
     this.splashTimeout = setTimeout( () => {
-      SplashScreen.hide(); this.splashHidden = true;
+      SplashScreen.hide();
+      this.splashHidden = true;
     }, 1000);
   }
   
   componentWillUnmount(){
+    Reactotron.log('App unmounts');
     Notification.removeAllListeners('press');
     GCM.removeEventListener('notification', this.handleNotification);
   }
@@ -108,8 +112,8 @@ export default class App extends Component {
 
   handleNotification = (notification) => {
     this.hideSplashimmediately();
+    Reactotron.log('Received notification in ' + (GCM.isInForeground ? 'foreground: ' : 'background: ') + notification.data.info);
     var info = JSON.parse(notification.data.info);
-    console.log('Received notification:', info, GCM.isInForeground);
     store.dispatch(addNotification(info));
     if (!GCM.isInForeground) {
       Notification.create({
@@ -122,7 +126,7 @@ export default class App extends Component {
   handleNotificationPress = (e) => {
     //{action: 'DEFAULT', payload: {}}
     Notification.clearAll();
-    console.log('Notification press', e);
+    Reactotron.log('Notification press: ' + JSON.stringify(e));
   };
 
   handleAndroidBackButton = () => {

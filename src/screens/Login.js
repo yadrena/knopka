@@ -6,6 +6,7 @@ import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import CaesarLogo from '../components/CaesarLogo';
 import I18n from 'react-native-i18n';
+import Reactotron from 'reactotron';
 import {buttonStyle, linkStyle, loginScreensStyle, inputStyle} from '../styles/common';
 
 class Login extends Component {
@@ -15,8 +16,8 @@ class Login extends Component {
   };
 
   state = {
-    email: __DEV__ ? 'kaospostage+2@gmail.com' : '',
-    password: __DEV__ ? 'asdfgh' : ''
+    email: __DEV__ ? 'me@ya.ru' : '',
+    password: __DEV__ ? 'qwerty' : ''
   };
 
   render() {
@@ -40,6 +41,7 @@ class Login extends Component {
   }
 
   onLogin = () => {
+    Reactotron.log('Login was pressed');
     this.props.login(this.state.email, this.state.password);
   }
 }
