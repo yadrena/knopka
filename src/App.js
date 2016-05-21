@@ -50,8 +50,7 @@ export default class App extends Component {
         store.dispatch(gcmRegistered(token));
       },
       onNotification: function(notification) {
-        Reactotron.log('NOTIFICATION: ' + notification.foreground);
-        Reactotron.log('NOTIFICATION: ' + JSON.stringify(notification.data));
+        Reactotron.log('NOTIFICATION: ' + JSON.stringify(notification));
         store.dispatch(addNotification(notification.data));
       },
       popInitialNotification: false
