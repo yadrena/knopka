@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {BackAndroid, Linking} from 'react-native';
-import {Router} from 'react-native-router-flux';
+import {BackAndroid, Linking, AsyncStorage} from 'react-native';
+import {persistStore} from 'redux-persist'
+import {Router, Actions} from 'react-native-router-flux';
 import {Provider, connect} from 'react-redux';
 import configureStore from './store/configureStore';
 import Reactotron from 'reactotron';
@@ -17,14 +18,34 @@ const store = configureStore();
 
 export default class App extends Component {
 
+  state = {
+    rehydrated: false,
+    initialRouting: {workScreens: false, home: false}
+  };
+
   splashTimeout;
   splashHidden = false;
 
   componentDidMount() {
     Reactotron.log('App mounted ' + GCM.launchNotification);
-    BackAndroid.addEventListener('hardwareBackPress', this.handleAndroidBackButton);
+    persistStore(store, {storage: AsyncStorage, blacklist: ['routes']}, () => {
+      Reactotron.log('Reghydrated!');
+      const {auth, wifis} = store.getState();
+      this.setState({
+        rehydrated: true,
+        initialRouting: {
+          workScreens: auth.userData !== null,
+          home: wifis.home !== null
+        }
+      });
+      if (wifis.home === null)
+        store.dispatch(checkWifi());
+      this.attachListeners();
+    });
+  }
 
-    store.dispatch(checkWifi());
+  attachListeners = () => {
+    BackAndroid.addEventListener('hardwareBackPress', this.handleAndroidBackButton);
 
     GCM.addEventListener('notification', this.handleNotification);
     Notification.addListener('press', this.handleNotificationPress);
@@ -49,7 +70,7 @@ export default class App extends Component {
       SplashScreen.hide();
       this.splashHidden = true;
     }, 1000);
-  }
+  };
   
   componentWillUnmount(){
     Reactotron.log('App unmounts');
@@ -58,9 +79,12 @@ export default class App extends Component {
   }
 
   render() {
+    const {rehydrated, initialRouting: {workScreens, home}} = this.state;
+    if(!rehydrated)
+      return null;
     return (
       <Provider store={store}>
-        <RouterWithRedux scenes={routing}/>
+        <RouterWithRedux scenes={routing(workScreens, home)}/>
       </Provider>
     );
   }

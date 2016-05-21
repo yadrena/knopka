@@ -10,9 +10,9 @@ import Home from "./screens/Home";
 import Settings from "./screens/Settings";
 import ConnectMat from "./screens/ConnectMat";
 
-export default Actions.create(
+export default (workScreens, home) => Actions.create(
   <Scene key="root">
-    <Scene key="authScreens" hideNavBar={true} type="push">
+    <Scene key="authScreens" hideNavBar={true} type="push" initial={!workScreens}>
       <Scene key="login" component={Login} initial={true}/>
       <Scene key="register" component={Register} />
       <Scene key="thanks" component={SimpleScreen}
@@ -30,13 +30,13 @@ export default Actions.create(
              buttonText={i18n.t('next')}
              onButtonPress={() => Actions.workScreens()}/>
     </Scene>
-    <Scene key="workScreens" hideNavBar={true} >
-      <Scene key="wifiManual" component={SimpleScreen} initial={true}
+    <Scene key="workScreens" hideNavBar={true} initial={workScreens}>
+      <Scene key="wifiManual" component={SimpleScreen} initial={!home}
              message={i18n.t('wifiManual')}  buttonStyle="button"
              buttonText={i18n.t('next')} bigLogo={false}
              onButtonPress={() => Actions.connectMat()}/>
       <Scene key="connectMat" component={ConnectMat}/>
-      <Scene key="home" component={Home}/>
+      <Scene key="home" component={Home} initial={home}/>
       <Scene key="settings" component={Settings}/>
     </Scene>
   </Scene>

@@ -1,12 +1,13 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import {autoRehydrate} from 'redux-persist'
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import Reactotron from 'reactotron';
 import rootReducer from '../reducers/rootReducer';
 
 export default () => {
-  const store = createStore(
-    rootReducer,
+  const enhancer = compose(
+    autoRehydrate(),
     applyMiddleware(
       thunk,
       createLogger({
@@ -16,6 +17,7 @@ export default () => {
       Reactotron.reduxMiddleware
     )
   );
+  const store = createStore(rootReducer, enhancer);
   Reactotron.addReduxStore(store);
   return store;
 }
