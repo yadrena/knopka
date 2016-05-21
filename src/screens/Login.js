@@ -32,7 +32,7 @@ class Login extends Component {
                      onChangeText={(text) => this.setState({password: text})}/>
           <View style={{height: 8}}/>
           <Button onPress={this.onLogin} {...buttonStyle}>{I18n.t('loginButton')}</Button>
-          <Button onPress={Actions.reqRecover} {...linkStyle}>{I18n.t('restorePassword')}</Button>
+          <Button onPress={Actions.reqRecover} {...linkStyle}>{I18n.t('recoverPassword')}</Button>
         </View>
         <Button onPress={Actions.register} {...linkStyle}>{I18n.t('registerButton')}</Button>
       </View>

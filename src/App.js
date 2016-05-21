@@ -61,17 +61,26 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <RouterWithRedux>
-          <Scene key="root" type="jump">
+          <Scene key="root" type="push">
             <Scene key="authScreens" hideNavBar={true}>
               <Scene key="login" component={Login} initial={true}/>
-              <Scene key="register" component={Register} type="push"/>
-              <Scene key="thanks" component={SimpleScreen} type="push"
+              <Scene key="register" component={Register} />
+              <Scene key="thanks" component={SimpleScreen}
                      header={i18n.t('regThanks')} buttonText={i18n.t('regThanksLink')}
                      onButtonPress={() => Actions.workScreens()}/>
-              <Scene key="reqRecover" component={RequestRecover} type="push"/>
+              <Scene key="reqRecover" component={RequestRecover} />
+              <Scene key="recoverManual" component={SimpleScreen}
+                     header={i18n.t('recoverManualHeader')}
+                     message={i18n.t('recoverManualMessage')}
+                     buttonText={i18n.t('next')}
+                     onButtonPress={() => Actions.changePassword()}/>
               <Scene key="changePassword" component={ChangePassword} type="replace"/>
+              <Scene key="passwordChanged" component={SimpleScreen}
+                     header={i18n.t('passwordChangedHeader')}
+                     buttonText={i18n.t('next')}
+                     onButtonPress={() => Actions.workScreens()}/>
             </Scene>
-            <Scene key="workScreens" hideNavBar={true} type="push" >
+            <Scene key="workScreens" hideNavBar={true} >
               <Scene key="wifiManual" component={SimpleScreen} initial={true}
                      message={i18n.t('wifiManual')}  buttonStyle="button"
                      buttonText={i18n.t('next')} bigLogo={false}

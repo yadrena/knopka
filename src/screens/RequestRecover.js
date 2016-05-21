@@ -23,7 +23,7 @@ class RequestRecover extends React.Component {
         <CaesarLogo big={true}/>
           <View style={loginScreensStyle.middleContainer}>
           <Text style={commonStyles.header}>
-            {I18n.t('restorePassword')}
+            {I18n.t('recoverPassword')}
           </Text>
           <TextInput placeholder={I18n.t('email')} keyboardType="email-address" value={this.state.email}
             {...inputStyle}

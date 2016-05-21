@@ -44,7 +44,7 @@ export function register(email, password) {
   }
 }
 
-export function login(email, password, thanks = false) {
+export function login(email, password, thanks = false, recovery = false) {
   return (dispatch, create) => {
     dispatch(setLoadingStatus(true));
     return firebase.authWithPassword({email, password})
@@ -68,8 +68,9 @@ export function login(email, password, thanks = false) {
           GCM.removeEventListener('register', regListener);
           if (thanks)
             Actions.thanks();
-          else
+          else if (!recovery)
             Actions.workScreens();
+          //Recovery is handled in its own action
         };
         GCM.addEventListener('register', regListener);
         GCM.requestPermissions();
@@ -87,7 +88,7 @@ export function requestRecover(email) {
     return firebase.resetPassword({email})
       .then(() => {
         console.log('Reset successful');
-        Actions.changePassword();
+        Actions.recoverManual();
       })
       .catch(error => {
         switch (error.code) {
@@ -104,9 +105,9 @@ export function requestRecover(email) {
 export function changePassword(email, oldPassword, newPassword) {
   return (dispatch, getState) => {
     console.log('Requesting password change', email, oldPassword, newPassword);
-    return dispatch(login(email, oldPassword))
+    return dispatch(login(email, oldPassword, false, true))
       .then(() => firebase.changePassword({email, oldPassword, newPassword}))
-      .then(() => Alert.alert('Success', 'The password has been successfully changed!'))
+      .then(() => Actions.passwordChanged())
       .catch(error => {
         switch (error.code) {
           case "INVALID_PASSWORD":
