@@ -1,46 +1,23 @@
 package com.knopka;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
-import com.facebook.react.ReactActivity;
-import com.oney.gcm.GcmPackage;
 import com.devstepbcn.wifi.AndroidWifiPackage;
-import com.remobile.splashscreen.RCTSplashScreenPackage;
+import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-
-import com.remobile.splashscreen.*;
+import com.i18n.reactnativei18n.ReactNativeI18n;
+import com.imagepicker.ImagePickerPackage;
+import com.remobile.splashscreen.RCTSplashScreenPackage;
+import android.content.Intent;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 
 import java.util.Arrays;
 import java.util.List;
-import com.devstepbcn.wifi.AndroidWifiPackage;
-import com.imagepicker.ImagePickerPackage;
-import io.neson.react.notification.NotificationPackage;
-import com.i18n.reactnativei18n.ReactNativeI18n;
+
+
 
 public class MainActivity extends ReactActivity {
-    //BluetoothButtonListener listener;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //takeKeyEvents(true);
-    }
-
-    /*
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        //This is phone button
-        //KeyEvent { action=ACTION_UP, keyCode=KEYCODE_VOLUME_UP, scanCode=115, metaState=0, flags=0x8, repeatCount=0, eventTime=127185805, downTime=127185535, deviceId=8, source=0x101 }
-        //This is remote shutter button
-        //KeyEvent { action=ACTION_UP, keyCode=KEYCODE_VOLUME_UP, scanCode=115, metaState=0, flags=0x8, repeatCount=0, eventTime=127095596, downTime=127095303, deviceId=20, source=0x101 }
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && listener != null){
-            listener.onPressed();
-            return true;
-        }
-        return super.onKeyUp(keyCode, event);
-    }
-    */
+    private ReactNativePushNotificationPackage mReactNativePushNotificationPackage;
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -66,16 +43,20 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected List<ReactPackage> getPackages() {
-        //listener = new BluetoothButtonListener();
+        mReactNativePushNotificationPackage = new ReactNativePushNotificationPackage(this);
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
-            new GcmPackage(),
             new AndroidWifiPackage(),
             new ImagePickerPackage(),
             new ReactNativeI18n(),
-            new NotificationPackage(this),
-                //new BluetoothShutterPackage(listener),
-            new RCTSplashScreenPackage(this)
+            new RCTSplashScreenPackage(this),
+            mReactNativePushNotificationPackage
         );
+    }
+
+    @Override
+    protected void onNewIntent (Intent intent) {
+        super.onNewIntent(intent);
+        mReactNativePushNotificationPackage.newIntent(intent);
     }
 }

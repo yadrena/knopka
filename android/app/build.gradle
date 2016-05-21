@@ -133,8 +133,7 @@ dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
-    compile project(':react-native-gcm-push-notification')
-    compile project(':react-native-system-notification')
+    compile project(':react-native-push-notification')
     compile project(':react-native-android-wifi')
     compile project(':react-native-splashscreen')
     compile project(':react-native-image-picker')

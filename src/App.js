@@ -5,11 +5,10 @@ import {Router, Actions} from 'react-native-router-flux';
 import {Provider, connect} from 'react-redux';
 import configureStore from './store/configureStore';
 import Reactotron from 'reactotron';
-import {checkWifi, addNotification, hardwareBack, setLastInitialURL} from './actions/Actions';
+import {checkWifi, addNotification, hardwareBack, setLastInitialURL, gcmRegistered} from './actions/Actions';
+import PushNotification from 'react-native-push-notification';
 
 import SplashScreen from '@remobile/react-native-splashscreen';
-import GCM from 'react-native-gcm-push-notification';
-import Notification from 'react-native-system-notification';
 import routing from './routing';
 import i18n from './i18n/i18n';
 
@@ -27,7 +26,7 @@ export default class App extends Component {
   splashHidden = false;
 
   componentDidMount() {
-    Reactotron.log('App mounted ' + GCM.launchNotification);
+    Reactotron.log('App mounted');
     persistStore(store, {storage: AsyncStorage, blacklist: ['routes']}, () => {
       Reactotron.log('Reghydrated!');
       const {auth, wifis} = store.getState();
@@ -45,10 +44,19 @@ export default class App extends Component {
   }
 
   attachListeners = () => {
+    PushNotification.configure({
+      onRegister: function(token) {
+        Reactotron.log('Notification receiver registered: ' + token);
+        store.dispatch(gcmRegistered(token));
+      },
+      onNotification: function(notification) {
+        Reactotron.log('NOTIFICATION: ' + notification.foreground);
+        Reactotron.log('NOTIFICATION: ' + JSON.stringify(notification.data));
+        store.dispatch(addNotification(notification.data));
+      },
+      popInitialNotification: false
+    });
     BackAndroid.addEventListener('hardwareBackPress', this.handleAndroidBackButton);
-
-    GCM.addEventListener('notification', this.handleNotification);
-    Notification.addListener('press', this.handleNotificationPress);
     //adb shell am start -W -a android.intent.action.VIEW -d "cesar://recover/me@ya.ru/hjdjfshf" com.knopka
     //adb shell am start -W -a android.intent.action.VIEW -d "http://miss-u-mat.cesar.ru/recover/me@ya.ru/hjdjfshf" com.knopka
     Linking.getInitialURL()
@@ -74,8 +82,8 @@ export default class App extends Component {
   
   componentWillUnmount(){
     Reactotron.log('App unmounts');
-    Notification.removeAllListeners('press');
-    GCM.removeEventListener('notification', this.handleNotification);
+    PushNotification.unregister();
+    BackAndroid.removeEventListener('hardwareBackPress', this.handleAndroidBackButton);
   }
 
   render() {
@@ -95,25 +103,6 @@ export default class App extends Component {
       this.splashHidden = true;
       clearTimeout(this.splashTimeout);
     }
-  };
-
-  handleNotification = (notification) => {
-    this.hideSplashimmediately();
-    Reactotron.log('Received notification in ' + (GCM.isInForeground ? 'foreground: ' : 'background: ') + notification.data.info);
-    var info = JSON.parse(notification.data.info);
-    store.dispatch(addNotification(info));
-    if (!GCM.isInForeground) {
-      Notification.create({
-        subject: info.subject,
-        message: info.message
-      });
-    }
-  };
-
-  handleNotificationPress = (e) => {
-    //{action: 'DEFAULT', payload: {}}
-    Notification.clearAll();
-    Reactotron.log('Notification press: ' + JSON.stringify(e));
   };
 
   handleAndroidBackButton = () => {

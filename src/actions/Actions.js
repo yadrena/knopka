@@ -5,8 +5,6 @@ import * as ActionTypes from './ActionTypes';
 import {Alert} from 'react-native';
 import wifi from 'react-native-android-wifi';
 
-import GCM from 'react-native-gcm-push-notification';
-
 const firebase = new Firebase('https://cesar-mat.firebaseio.com');
 
 const setLoadingStatus = createAction(ActionTypes.LOADING);
@@ -54,28 +52,6 @@ export function login(email, password, thanks = false, recovery = false) {
         dispatch(setLoadingStatus(false));
         //uid : "1ada9111-ea79-41fa-821c-c6b698e1de70"
         dispatch(userLoggedIn(userData));
-        const regListener = function(data){
-          if(!data.error){
-            console.log('Received gcm token:', data.registrationToken);
-            dispatch(gcmRegistered(data.registrationToken));
-            firebase.child("users").child(userData.uid).set({
-              email: email,
-              gcmToken: data.registrationToken
-            });
-          }
-          else {
-            Alert.alert('GCM Error', 'Failed to register token: ' + data.error);
-            console.log('GCM error:', data.error);
-          }
-          GCM.removeEventListener('register', regListener);
-          if (thanks)
-            Actions.thanks();
-          else if (!recovery)
-            Actions.workScreens();
-          //Recovery is handled in its own action
-        };
-        GCM.addEventListener('register', regListener);
-        GCM.requestPermissions();
       })
       .catch(error => {
         dispatch(setLoadingStatus(false));
