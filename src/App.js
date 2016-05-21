@@ -44,16 +44,19 @@ export default class App extends Component {
   }
 
   attachListeners = () => {
+    Reactotron.log('Attaching listeners!');
     PushNotification.configure({
       onRegister: function(token) {
-        Reactotron.log('Notification receiver registered: ' + token);
-        store.dispatch(gcmRegistered(token));
+        Reactotron.log('Notification receiver registered: ' + token.token);
+        store.dispatch(gcmRegistered(token.token));
       },
       onNotification: function(notification) {
         Reactotron.log('NOTIFICATION: ' + JSON.stringify(notification));
         if (store.getState().settings.receivePush)
           store.dispatch(addNotification(notification.data));
       },
+      senderID: "304075958563",
+      requestPermissions: true,
       popInitialNotification: false
     });
     BackAndroid.addEventListener('hardwareBackPress', this.handleAndroidBackButton);
