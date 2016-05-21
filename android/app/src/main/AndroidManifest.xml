@@ -72,9 +72,10 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="miss-u-mat.cesar.ru" android:pathPrefix="/recover" />
                 <!-- Accepts URIs that begin with "cesar://recover” -->
                 <data android:scheme="cesar" android:host="recover" />
-
+                https://miss-u-mat.cesar.ru/
             </intent-filter>
 
 

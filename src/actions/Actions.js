@@ -7,7 +7,7 @@ import wifi from 'react-native-android-wifi';
 
 import GCM from 'react-native-gcm-push-notification';
 
-const firebase = new Firebase('https://knopka.firebaseio.com');
+const firebase = new Firebase('https://cesar-mat.firebaseio.com');
 
 const setLoadingStatus = createAction(ActionTypes.LOADING);
 const userLoggedIn = createAction(ActionTypes.USER_LOGGED_IN);

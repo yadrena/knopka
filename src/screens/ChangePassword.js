@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Button from 'apsl-react-native-button';
 import {changePassword} from '../actions/Actions';
-import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {View, TextInput} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import CaesarLogo from '../components/CaesarLogo';
 import I18n from 'react-native-i18n';
@@ -10,14 +10,26 @@ import {buttonStyle, linkStyle, loginScreensStyle, inputStyle} from '../styles/c
 
 class ChangePassword extends React.Component {
   static propTypes = {
-    changePassword: PropTypes.func
+    changePassword: PropTypes.func,
+    email: PropTypes.string,
+    oldPassword: PropTypes.string
   };
 
-  state = {
-    email: __DEV__ ? 'kaospostage+2@gmail.com' : '',
-    oldPassword: __DEV__ ? 'qwerty' : '',
-    newPassword: __DEV__ ? 'asdfgh' : ''
+  static defaultProps = {
+    email: '',
+    oldPassword: ''
   };
+
+  constructor(props){
+    super(props);
+    const email = this.props.email ? this.props.email : (__DEV__ ? 'kaospostage+2@gmail.com' : '');
+    const oldPassword = this.props.oldPassword ? this.props.oldPassword : (__DEV__ ? 'asdfgh' : '');
+    this.state = {
+      email,
+      oldPassword,
+      newPassword: __DEV__ ? 'qwerty' : ''
+    }
+  }
 
   render() {
     const {changePassword} = this.props;
@@ -35,7 +47,7 @@ class ChangePassword extends React.Component {
           <View style={{height: 8}}/>
           <Button onPress={() => changePassword(email, oldPassword, newPassword)} {...buttonStyle}>{I18n.t('changePasswordButton')}</Button>
         </View>
-        <Button onPress={Actions.pop} {...linkStyle}>{I18n.t('loginButton')}</Button>
+        <Button onPress={Actions.login} {...linkStyle}>{I18n.t('loginButton')}</Button>
       </View>
     );
   }

@@ -23,24 +23,34 @@ const RouterWithRedux = connect()(Router);
 const store = configureStore();
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+
+  splashTimeout;
+  splashHidden = false;
 
   componentDidMount() {
     BackAndroid.addEventListener('hardwareBackPress', this.handleAndroidBackButton);
 
     store.dispatch(checkWifi());
-    setTimeout( () => SplashScreen.hide(), 1000);
-    
+
     GCM.addEventListener('notification', this.handleNotification);
     Notification.addListener('press', this.handleNotificationPress);
-    //adb shell am start -W -a android.intent.action.VIEW -d "cesar://recover" com.knopka
+    //adb shell am start -W -a android.intent.action.VIEW -d "cesar://recover/me@ya.ru/hjdjfshf" com.knopka
+    //adb shell am start -W -a android.intent.action.VIEW -d "http://miss-u-mat.cesar.ru/recover/me@ya.ru/hjdjfshf" com.knopka
     Linking.getInitialURL()
       .then(url => {
-        if (url) { console.log('Initial url is: ' + url); }
+        const parts = url ? url.split('/') : [];
+        console.log('Url parts:', parts);
+        if (parts.length === 6 && parts[2] === 'miss-u-mat.cesar.ru' && parts[3] === 'recover'){
+          console.log('Deep link to password change ', parts[4], parts[5]);
+          Actions.changePassword({email: parts[4], oldPassword: parts[5]});
+          this.hideSplashimmediately();
+        }
       })
       .catch(err => console.error('Deep linking error', err));
+
+    this.splashTimeout = setTimeout( () => {
+      SplashScreen.hide(); this.splashHidden = true;
+    }, 1000);
   }
   
   componentWillUnmount(){
@@ -72,7 +82,16 @@ export default class App extends Component {
     );
   }
 
+  hideSplashimmediately = () => {
+    if (!this.splashHidden){
+      SplashScreen.hide();
+      this.splashHidden = true;
+      clearTimeout(this.splashTimeout);
+    }
+  };
+
   handleNotification = (notification) => {
+    this.hideSplashimmediately();
     var info = JSON.parse(notification.data.info);
     console.log('Received notification:', info, GCM.isInForeground);
     store.dispatch(addNotification(info));
