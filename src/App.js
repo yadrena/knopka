@@ -1,22 +1,15 @@
 import React, {Component} from 'react';
 import {BackAndroid, Linking} from 'react-native';
-import {Actions, Scene, Router} from 'react-native-router-flux';
-import { Provider, connect } from 'react-redux';
+import {Router} from 'react-native-router-flux';
+import {Provider, connect} from 'react-redux';
 import configureStore from './store/configureStore';
-import Login from "./screens/Login";
-import Register from "./screens/Register";
-import SimpleScreen from "./screens/SimpleScreen";
-import RequestRecover from "./screens/RequestRecover";
-import ChangePassword from "./screens/ChangePassword";
-import Home from "./screens/Home";
-import Settings from "./screens/Settings";
-import ConnectMat from "./screens/ConnectMat";
 import Reactotron from 'reactotron';
 import {checkWifi, addNotification, hardwareBack, setLastInitialURL} from './actions/Actions';
 
 import SplashScreen from '@remobile/react-native-splashscreen';
 import GCM from 'react-native-gcm-push-notification';
 import Notification from 'react-native-system-notification';
+import routing from './routing';
 import i18n from './i18n/i18n';
 
 const RouterWithRedux = connect()(Router);
@@ -67,37 +60,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <RouterWithRedux>
-          <Scene key="root" type="push">
-            <Scene key="authScreens" hideNavBar={true}>
-              <Scene key="login" component={Login} initial={true}/>
-              <Scene key="register" component={Register} />
-              <Scene key="thanks" component={SimpleScreen}
-                     header={i18n.t('regThanks')} buttonText={i18n.t('regThanksLink')}
-                     onButtonPress={() => Actions.workScreens()}/>
-              <Scene key="reqRecover" component={RequestRecover} />
-              <Scene key="recoverManual" component={SimpleScreen}
-                     header={i18n.t('recoverManualHeader')}
-                     message={i18n.t('recoverManualMessage')}
-                     buttonText={i18n.t('next')}
-                     onButtonPress={() => Actions.changePassword()}/>
-              <Scene key="changePassword" component={ChangePassword} type="replace"/>
-              <Scene key="passwordChanged" component={SimpleScreen}
-                     header={i18n.t('passwordChangedHeader')}
-                     buttonText={i18n.t('next')}
-                     onButtonPress={() => Actions.workScreens()}/>
-            </Scene>
-            <Scene key="workScreens" hideNavBar={true} >
-              <Scene key="wifiManual" component={SimpleScreen} initial={true}
-                     message={i18n.t('wifiManual')}  buttonStyle="button"
-                     buttonText={i18n.t('next')} bigLogo={false}
-                     onButtonPress={() => Actions.connectMat()}/>
-              <Scene key="connectMat" component={ConnectMat}/>
-              <Scene key="home" component={Home}/>
-              <Scene key="settings" component={Settings}/>
-            </Scene>
-          </Scene>
-        </RouterWithRedux>
+        <RouterWithRedux scenes={routing}/>
       </Provider>
     );
   }
