@@ -4,7 +4,7 @@ import commonStyles from '../styles/common';
 
 export default class Avatar extends React.Component {
   static propTypes = {
-    avatar: PropTypes.string,
+    avatar: PropTypes.object,
     onPress: PropTypes.func
   };
 
