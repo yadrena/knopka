@@ -14,6 +14,7 @@ const userLoggedIn = createAction(ActionTypes.USER_LOGGED_IN);
 const wifiListed = createAction(ActionTypes.WIFI_LISTED);
 const wifiListFailed = createAction(ActionTypes.WIFI_LIST_FAILED);
 const gcmRegistered = createAction(ActionTypes.GCM_REGISTERED);
+const setLastInitialURL = createAction(ActionTypes.SET_LAST_INITIAL_URL);
 
 export const setAvatar = createAction(ActionTypes.SET_AVATAR);
 export const setNickname = createAction(ActionTypes.SET_NICKNAME);

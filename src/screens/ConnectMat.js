@@ -52,7 +52,7 @@ class ConnectMat extends React.Component {
     return (
       <View style={styles.listGroup}>
         <Text style={commonStyle.error}>{error}</Text>
-        <Icon.Button name="refresh" backgroundColor="#000000" onPress={this.props.checkWifi}/>
+        <Icon.Button name="refresh" backgroundColor="#101010" onPress={this.props.checkWifi}/>
       </View>
     );
   };
@@ -82,7 +82,7 @@ class ConnectMat extends React.Component {
     return (
       <View style={styles.listGroup}>
         {this.renderPicker()}
-        <Icon.Button name="refresh" backgroundColor="#000000" onPress={this.props.checkWifi}/>
+        <Icon.Button name="refresh" backgroundColor="#101010" onPress={this.props.checkWifi}/>
       </View>
     )
   };

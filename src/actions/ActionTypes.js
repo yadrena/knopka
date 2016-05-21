@@ -4,6 +4,7 @@ export const WIFI_REFRESH = 'WIFI_REFRESH';
 export const WIFI_LISTED = 'WIFI_LISTED';
 export const WIFI_LIST_FAILED = 'WIFI_LIST_FAILED';
 export const GCM_REGISTERED = 'GCM_REGISTERED';
+export const SET_LAST_INITIAL_URL = 'SET_LAST_INITIAL_URL';
 
 //Settings
 export const SET_AVATAR = 'SET_AVATAR';

@@ -11,7 +11,7 @@ import ChangePassword from "./screens/ChangePassword";
 import Home from "./screens/Home";
 import Settings from "./screens/Settings";
 import ConnectMat from "./screens/ConnectMat";
-import {checkWifi, addNotification, hardwareBack} from './actions/Actions';
+import {checkWifi, addNotification, hardwareBack, setLastInitialURL} from './actions/Actions';
 
 import SplashScreen from '@remobile/react-native-splashscreen';
 import GCM from 'react-native-gcm-push-notification';
@@ -37,12 +37,15 @@ export default class App extends Component {
     //adb shell am start -W -a android.intent.action.VIEW -d "http://miss-u-mat.cesar.ru/recover/me@ya.ru/hjdjfshf" com.knopka
     Linking.getInitialURL()
       .then(url => {
-        const parts = url ? url.split('/') : [];
-        console.log('Url parts:', parts);
-        if (parts.length === 6 && parts[2] === 'miss-u-mat.cesar.ru' && parts[3] === 'recover'){
-          console.log('Deep link to password change ', parts[4], parts[5]);
-          Actions.changePassword({email: parts[4], oldPassword: parts[5]});
-          this.hideSplashimmediately();
+        if (store.getState().lastInitialURL.url !== url) {
+          const parts = url ? url.split('/') : [];
+          console.log('Url parts:', parts);
+          if (parts.length === 6 && parts[2] === 'miss-u-mat.cesar.ru' && parts[3] === 'recover') {
+            console.log('Deep link to password change ', parts[4], parts[5]);
+            store.dispatch(setLastInitialURL(url));
+            Actions.changePassword({email: parts[4], oldPassword: parts[5]});
+            this.hideSplashimmediately();
+          }
         }
       })
       .catch(err => console.error('Deep linking error', err));

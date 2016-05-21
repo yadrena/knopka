@@ -12,12 +12,14 @@ export default class WorkScreen extends React.Component {
     contentStyle: PropTypes.object
   };
 
+  /*
   static defaultProps = {
     lefty: {
       title: I18n.t('backButton'),
       action: Actions.pop
     }
   };
+  */
 
   render() {
     let {lefty, righty} = this.props;
