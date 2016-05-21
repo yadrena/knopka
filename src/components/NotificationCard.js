@@ -6,7 +6,7 @@ export default class NotificationCard extends React.Component {
   static propTypes = {
     depth: PropTypes.number,
     notification: PropTypes.object,
-    avatar: PropTypes.string,
+    avatar: PropTypes.object,
     nickname: PropTypes.string,
     onRemove: PropTypes.func
   };
