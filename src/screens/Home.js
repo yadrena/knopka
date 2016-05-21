@@ -19,7 +19,7 @@ class Home extends Component {
 
   static mapStateToProps = state => ({
     notifications: state.notifications,
-    avatar: state.settings.notifications,
+    avatar: state.settings.avatar,
     nickname: state.settings.nickname
   });
 
