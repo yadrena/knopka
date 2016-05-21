@@ -15,6 +15,7 @@ const wifiListed = createAction(ActionTypes.WIFI_LISTED);
 const wifiListFailed = createAction(ActionTypes.WIFI_LIST_FAILED);
 const gcmRegistered = createAction(ActionTypes.GCM_REGISTERED);
 const setLastInitialURL = createAction(ActionTypes.SET_LAST_INITIAL_URL);
+const setHomeWifi = createAction(ActionTypes.WIFI_HOME_SELECTED);
 
 export const setAvatar = createAction(ActionTypes.SET_AVATAR);
 export const setNickname = createAction(ActionTypes.SET_NICKNAME);
@@ -158,6 +159,7 @@ export function connectToMat({ssid, bssid}, password ){
       return;
     }
     const {password: {email}, uid} = userData;
+    dispatch(setHomeWifi(ssid));
     // const payload = {
     //   ssid, bssid, email, password, uid, gcmToken
     // };
