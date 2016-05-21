@@ -5,12 +5,11 @@ import { Provider, connect } from 'react-redux';
 import configureStore from './store/configureStore';
 import Login from "./screens/Login";
 import Register from "./screens/Register";
-import RegThanks from "./screens/RegThanks";
+import SimpleScreen from "./screens/SimpleScreen";
 import RequestRecover from "./screens/RequestRecover";
 import ChangePassword from "./screens/ChangePassword";
 import Home from "./screens/Home";
 import Settings from "./screens/Settings";
-import WifiManual from "./screens/WifiManual";
 import ConnectMat from "./screens/ConnectMat";
 import {checkWifi, addNotification, hardwareBack} from './actions/Actions';
 
@@ -66,12 +65,17 @@ export default class App extends Component {
             <Scene key="authScreens" hideNavBar={true}>
               <Scene key="login" component={Login} initial={true}/>
               <Scene key="register" component={Register} type="push"/>
-              <Scene key="thanks" component={RegThanks} type="push"/>
+              <Scene key="thanks" component={SimpleScreen} type="push"
+                     header={i18n.t('regThanks')} buttonText={i18n.t('regThanksLink')}
+                     onButtonPress={() => Actions.workScreens()}/>
               <Scene key="reqRecover" component={RequestRecover} type="push"/>
               <Scene key="changePassword" component={ChangePassword} type="replace"/>
             </Scene>
             <Scene key="workScreens" hideNavBar={true} type="push" >
-              <Scene key="wifiManual" component={WifiManual} initial={true}/>
+              <Scene key="wifiManual" component={SimpleScreen} initial={true}
+                     message={i18n.t('wifiManual')}  buttonStyle="button"
+                     buttonText={i18n.t('next')} bigLogo={false}
+                     onButtonPress={() => Actions.connectMat()}/>
               <Scene key="connectMat" component={ConnectMat}/>
               <Scene key="home" component={Home}/>
               <Scene key="settings" component={Settings}/>
