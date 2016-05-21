@@ -51,7 +51,8 @@ export default class App extends Component {
       },
       onNotification: function(notification) {
         Reactotron.log('NOTIFICATION: ' + JSON.stringify(notification));
-        store.dispatch(addNotification(notification.data));
+        if (store.getState().settings.receivePush)
+          store.dispatch(addNotification(notification.data));
       },
       popInitialNotification: false
     });
