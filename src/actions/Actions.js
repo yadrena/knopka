@@ -173,20 +173,21 @@ export function connectToMat({ssid, bssid}, password ){
     //   ssid, bssid, email, password, uid, gcmToken
     // };
     // console.log('Connect to', payload);
-    const timeout = new Promise((resolve, reject) => setTimeout(reject, 3000));
+    const timeout = new Promise((resolve, reject) => setTimeout(reject, 30000));
     const url = `http://192.168.45.1/index.php?pwd=O5FgdYdrcSgt3sl3ys8lc7LENYbo69&gcm_token=${gcmToken}&psk=${password}&ssid=${ssid}`;
     console.log('Fetching url', url);
+    //For now, we just show 'connecting' screen and wait for push notification
     Promise.race([fetch(url), timeout])
       .then(() => {
-        console.log('Mat successfully connected!')
-        Actions.home();
+        console.log('Mat successfully connected!');
+        //Actions.home();
       })
       .catch(error => {
-        console.log('Failed to connect to mat')
+        console.log('Failed to connect to mat');
         //Actions.connectionFailed();
-        Actions.home();
+        //Actions.home();
       });
-      Actions.connectingMat();
+    Actions.connectingMat();
   };
 }
 

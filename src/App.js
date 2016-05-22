@@ -53,11 +53,7 @@ export default class App extends Component {
         Reactotron.log('Notification receiver registered: ' + token.token);
         store.dispatch(gcmRegistered(token.token));
       },
-      onNotification: function(notification) {
-        Reactotron.log('NOTIFICATION: ' + JSON.stringify(notification));
-        if (store.getState().settings.receivePush)
-          store.dispatch(addNotification(notification.data));
-      },
+      onNotification: this.onNotification,
       senderID: "304075958563",
       requestPermissions: true,
       popInitialNotification: false
@@ -102,6 +98,29 @@ export default class App extends Component {
       </Provider>
     );
   }
+  
+  onNotification = (notification) => {
+    Reactotron.log('NOTIFICATION: ' + JSON.stringify(notification));
+    if (!notification.data || !notification.data.event){
+      console.warn('Notification must contain data and event code');
+      return;
+    }
+    console.log('Notification:', notification.data.event, notification);
+    switch (notification.data.event){
+      case 1://Mat connected to home wi-fi network
+        Actions.home();
+        break;
+      case 2://Message from pet
+        if (store.getState().settings.receivePush)
+          store.dispatch(addNotification(notification.data));
+        break;
+      case 3://TODO: Battery status - handle
+        console.log('Battery status changed');
+        break;
+      default:
+        console.warn('Unsupported push event');
+    }
+  };
 
   hideSplashimmediately = () => {
     if (!this.splashHidden){
