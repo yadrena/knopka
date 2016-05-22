@@ -15,7 +15,8 @@ export default class NotificationCard extends React.Component {
 
   render() {
     const timestamp = this.props.notification.timestamp;
-    const time = moment(timestamp).calendar(null, i18n.t('timeFormat'));
+    const time = moment.unix(timestamp).calendar(undefined, i18n.t('timeFormat'));
+    console.log(timestamp, time, i18n.t('timeFormat'));
     return (
       <TouchableWithoutFeedback>
         <View style={[styles.card, this.props.style]}>

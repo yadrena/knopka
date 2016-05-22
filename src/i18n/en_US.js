@@ -36,6 +36,6 @@ export default {
     nextWeek: '[Next week]',
     lastDay: '[Yesterday at] hh:mm a',
     lastWeek: '[Last] dddd [at] hh:mm a',
-    sameElse: ' hh:mm a mm/dd/yyyy'
+    sameElse: 'hh:mm a M/D/YYYY'
   }
 };
