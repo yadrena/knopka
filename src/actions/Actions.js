@@ -13,7 +13,6 @@ const wifiListed = createAction(ActionTypes.WIFI_LISTED);
 const wifiListFailed = createAction(ActionTypes.WIFI_LIST_FAILED);
 const setHomeWifi = createAction(ActionTypes.WIFI_HOME_SELECTED);
 
-export const gcmRegistered = createAction(ActionTypes.GCM_REGISTERED);
 export const setLastInitialURL = createAction(ActionTypes.SET_LAST_INITIAL_URL);
 export const setAvatar = createAction(ActionTypes.SET_AVATAR);
 export const setNickname = createAction(ActionTypes.SET_NICKNAME);
@@ -45,7 +44,7 @@ export function register(email, password) {
 }
 
 export function login(email, password, thanks = false, recovery = false) {
-  return (dispatch, create) => {
+  return (dispatch, getState) => {
     dispatch(setLoadingStatus(true));
     return firebase.authWithPassword({email, password})
       .then(userData => {
@@ -55,11 +54,35 @@ export function login(email, password, thanks = false, recovery = false) {
           Actions.thanks();
         else if (!recovery)
           Actions.workScreens();
+        dispatch(updateFirebase());
       })
       .catch(error => {
         dispatch(setLoadingStatus(false));
         Alert.alert('Login failed', 'Login failed: ' + error);
       });
+  }
+}
+
+function updateFirebase(){
+  return (dispatch, getState) => {
+    let authenticated = firebase.getAuth() !== null;
+    let auth = getState().auth;
+    if (!auth){
+      console.warn('Wants to save in firebase, but not authenticated in app');
+      return;
+    }
+    console.log('Updating firebase', authenticated);
+    const uid = auth.userData.uid;
+    const data = {email: auth.userData.password.email, gcmToken: auth.gcmToken};
+    if (!authenticated) {
+      const rehydratedFirbaseToken = auth.userData.token;
+      firebase.authWithCustomToken(rehydratedFirbaseToken)
+        .then(() => firebase.child("users").child(uid).set(data))
+        .catch(error => console.warn('Firebase rehydration failed: ' + error));
+    }
+    else {
+      firebase.child("users").child(uid).set(data);
+    }
   }
 }
 
@@ -102,6 +125,13 @@ export function changePassword(email, oldPassword, newPassword) {
         }
       });
   };
+}
+
+export function gcmRegistered(gcmToken){
+  return (dispatch, getState) => {
+    dispatch(createAction(ActionTypes.GCM_REGISTERED)(gcmToken));
+    dispatch(updateFirebase());
+  }
 }
 
 export function checkWifi(){

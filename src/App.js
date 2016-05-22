@@ -29,6 +29,9 @@ export default class App extends Component {
     Reactotron.log('App mounted');
     persistStore(store, {storage: AsyncStorage, blacklist: ['routes']}, () => {
       Reactotron.log('Reghydrated!');
+      //TODO: should login to firebase with rehydrated token
+      //Currently it logs in lazily, because it is only needed to store gcmToken
+      //bacause firebase session length is set to 7 month
       const {auth, wifis} = store.getState();
       this.setState({
         rehydrated: true,
