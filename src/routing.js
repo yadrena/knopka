@@ -36,6 +36,16 @@ export default (workScreens, home) => Actions.create(
              buttonText={i18n.t('next')} bigLogo={false}
              onButtonPress={() => Actions.connectMat()}/>
       <Scene key="connectMat" component={ConnectMat}/>
+      <Scene key="connectingMat" component={SimpleScreen}
+             header={i18n.t('connecting.header')}
+             message={i18n.t('connecting.message')}
+             bigLogo={false}/>
+      <Scene key="connectionFailed" component={SimpleScreen}
+             header={i18n.t('connectionFail.header')}
+             message={i18n.t('connectionFail.message')}
+             buttonText={i18n.t('connectionFail.button')}
+             onButtonPress={() => Actions.connectMat()}
+             bigLogo={false}/>
       <Scene key="home" component={Home} initial={home}/>
       <Scene key="settings" component={Settings}/>
     </Scene>

@@ -42,9 +42,12 @@ export default class SimpleScreen extends React.Component {
             </Text>
           </View>
         }
-        <Button onPress={this.onButtonPress} {...btnStyle}>
-          {this.props.buttonText}
-        </Button>
+        {
+          this.props.buttonText !== '' &&
+          <Button onPress={this.onButtonPress} {...btnStyle}>
+            {this.props.buttonText}
+          </Button>
+        }
       </View>
     );
   }

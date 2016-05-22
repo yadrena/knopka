@@ -39,5 +39,14 @@ export default {
     lastDay: '[Вчера в] HH:mm',
     lastWeek: '[Прошлый] dddd [в] HH:mm',
     sameElse: 'HH:mm DD/MM/YYYY'
+  },
+  connecting: {
+    header: 'Подключаюсь',
+    message: 'Подключаю коврик miss-U-mat к сети Wi-Fi'
+  },
+  connectionFail: {
+    header: 'Ошибка',
+    message: 'Коврику не удалось подключится к Wi-Fi',
+    button: 'Назад'
   }
 };

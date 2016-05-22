@@ -37,5 +37,15 @@ export default {
     lastDay: '[Yesterday at] hh:mm a',
     lastWeek: '[Last] dddd [at] hh:mm a',
     sameElse: 'hh:mm a M/D/YYYY'
+  },
+  connecting: {
+    header: 'Please wait',
+    message: 'Connecting miss-U-mat to Wi-Fi hotspot'
+  },
+  connectionFail: {
+    header: 'Oops!',
+    message: 'miss-U-mat could not connect to selected network',
+    button: 'Back'
   }
+
 };
