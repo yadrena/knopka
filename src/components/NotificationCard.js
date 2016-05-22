@@ -21,9 +21,11 @@ export default class NotificationCard extends React.Component {
       <TouchableWithoutFeedback>
         <View style={[styles.card, this.props.style]}>
           <Avatar avatar={this.props.avatar}/>
-          <Text style={styles.nickname}>{this.props.nickname}</Text>
+          <View style={styles.nickBox}>
+            <Text style={styles.nickname}>{this.props.nickname}</Text>
+          </View>
           <Text style={styles.message}>{this.props.notification.message}</Text>
-          <Text style={styles.message}>{time}</Text>
+          <Text style={styles.timestamp}>{time}</Text>
         </View>
       </TouchableWithoutFeedback>
     );
@@ -35,20 +37,34 @@ export const CARD_SIZE = {width: 250, height: 400};
 const styles = StyleSheet.create({
   card: {
     alignItems: 'center',
-    paddingVertical: 20,
+    paddingTop: 24,
+    paddingBottom: 8,
+    paddingHorizontal: 16,
     justifyContent: 'space-around',
     borderRadius: 5,
     width: CARD_SIZE.width,
     height: CARD_SIZE.height
   },
+  nickBox: {
+    marginVertical: 16,
+    backgroundColor: '#f5da99',
+    paddingHorizontal: 16,
+    paddingVertical: 4
+  },
   nickname: {
-    color: 'black',
-    fontSize: 24
+    color: '#695627',
+    fontSize: 18,
+    fontWeight: '500'
   },
   message: {
     flex: 1,
     color: 'black',
-    fontSize: 18,
+    fontSize: 24,
     textAlign: 'center'
+  },
+  timestamp: {
+    color: '#5b5c5c',
+    fontSize: 16,
+    marginTop: 8
   }
 });
