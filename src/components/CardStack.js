@@ -107,10 +107,10 @@ export default class CardStack extends React.Component {
       position: 'absolute',
       elevation: 1 + stackPos,
       transform: [
-        {scale},
         ...panTransform,
-        {translateX: x - CARD_SIZE.width / 2  + STEP * depth * scale},
-        {translateY: y - CARD_SIZE.height / 2 - 4 * STEP * depth}
+        {translateX: x - CARD_SIZE.width / 2},
+        {translateY: y - CARD_SIZE.height / 2 - 4 * STEP * depth},
+        {scale}
       ]
     };
   };
