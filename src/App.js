@@ -5,7 +5,7 @@ import {Router, Actions} from 'react-native-router-flux';
 import {Provider, connect} from 'react-redux';
 import configureStore from './store/configureStore';
 import Reactotron from 'reactotron';
-import {checkWifi, addNotification, hardwareBack, setLastInitialURL, gcmRegistered} from './actions/Actions';
+import {checkWifi, addNotification, hardwareBack, setLastInitialURL, gcmRegistered, wifiMatConnected} from './actions/Actions';
 import PushNotification from 'react-native-push-notification';
 
 import SplashScreen from '@remobile/react-native-splashscreen';
@@ -37,7 +37,7 @@ export default class App extends Component {
         rehydrated: true,
         initialRouting: {
           workScreens: auth.userData !== null,
-          home: wifis.home !== null
+          home: wifis.connected
         }
       });
       if (wifis.home === null)
@@ -108,6 +108,7 @@ export default class App extends Component {
     console.log('Notification:', notification.data.event, notification);
     switch (notification.data.event){
       case 1://Mat connected to home wi-fi network
+        store.dispatch(wifiMatConnected());
         Actions.home();
         break;
       case 2://Message from pet

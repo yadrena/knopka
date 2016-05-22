@@ -19,6 +19,7 @@ export const setNickname = createAction(ActionTypes.SET_NICKNAME);
 export const setReceivePush = createAction(ActionTypes.SET_RECEIVE_PUSH);
 export const addNotification = createAction(ActionTypes.ADD_NOTIFICATION);
 export const popNotification = createAction(ActionTypes.POP_NOTIFICATION);
+export const wifiMatConnected = createAction(ActionTypes.WIFI_MAT_CONNECTED);
 
 export function register(email, password) {
   return (dispatch, create) => {
