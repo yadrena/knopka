@@ -21,7 +21,7 @@ export default class CardStack extends React.Component {
       content.push(
         <NotificationCard key={'note'+i} depth={d} notification={note}
                           avatar={avatar} nickname={nickname}
-                          onRemove={onRemove}/>
+                          onRemove={onRemove} style={this.getCardStyle(d)}/>
       );
     }
 
@@ -31,11 +31,32 @@ export default class CardStack extends React.Component {
       </View>
     );
   }
+
+  getCardStyle = (depth) => {
+    const stackPos = 3 - depth;
+    const scale = 1 - 0.1 * depth;
+    return {
+      elevation: stackPos,
+      transform: [
+        {scale},
+        {translateX: 2 * STEP},
+        {translateY: STEP - 3.6 * STEP * depth / scale }
+      ],
+      backgroundColor: CARD_COLORS[depth],
+      width: CARDW,
+      height: CARDH
+    };
+  }
 }
+
+const CARDW = 250;
+const CARDH = 400;
+const STEP = 8;
+const CARD_COLORS = ['#d8d8d8', '#cccccc', '#a8a8a8'];
 
 const styles = StyleSheet.create({
   stack: {
-    width: 250,
-    height: 450
+    width: CARDW + 4 * STEP,
+    height: CARDH + 4 * STEP
   }
 });

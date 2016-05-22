@@ -8,14 +8,14 @@ export default class NotificationCard extends React.Component {
     notification: PropTypes.object,
     avatar: PropTypes.object,
     nickname: PropTypes.string,
-    onRemove: PropTypes.func
+    onRemove: PropTypes.func,
+    style: PropTypes.object
   };
 
   render() {
-    console.log('Render card', this.props);
     return (
       <TouchableWithoutFeedback onLongPress={this.props.onRemove}>
-        <View style={[styles.card, this.getOwnStyle()]}>
+        <View style={[styles.card, this.props.style]}>
           <Avatar avatar={this.props.avatar}/>
           <Text style={styles.nickname}>{this.props.nickname}</Text>
           <Text style={styles.message}>{this.props.notification.message}</Text>
@@ -25,21 +25,7 @@ export default class NotificationCard extends React.Component {
     );
   }
 
-  getOwnStyle = () => {
-    const depth = this.props.depth;
-    return {
-      elevation: (3-depth),
-      top: (3 - depth) * STEP,
-      left: depth * STEP,
-      right: depth * STEP,
-      bottom: depth * STEP,
-      backgroundColor: CARD_COLORS[depth]
-    };
-  }
 }
-
-const STEP = 8;
-const CARD_COLORS = ['#d8d8d8', '#cccccc', '#a8a8a8'];
 
 const styles = StyleSheet.create({
   card: {
@@ -48,7 +34,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 20,
     justifyContent: 'space-around',
-    borderRadius: 2
+    borderRadius: 5
   },
   nickname: {
     color: 'black',
