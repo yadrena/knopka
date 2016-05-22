@@ -10,7 +10,6 @@ export default class NotificationCard extends React.Component {
     notification: PropTypes.object,
     avatar: PropTypes.object,
     nickname: PropTypes.string,
-    onRemove: PropTypes.func,
     style: PropTypes.object
   };
 
@@ -18,7 +17,7 @@ export default class NotificationCard extends React.Component {
     const timestamp = this.props.notification.timestamp;
     const time = moment(timestamp).calendar(null, i18n.t('timeFormat'));
     return (
-      <TouchableWithoutFeedback onPress={this.props.onRemove}>
+      <TouchableWithoutFeedback>
         <View style={[styles.card, this.props.style]}>
           <Avatar avatar={this.props.avatar}/>
           <Text style={styles.nickname}>{this.props.nickname}</Text>
