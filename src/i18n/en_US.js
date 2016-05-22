@@ -29,5 +29,13 @@ export default {
   homeEmptyLower: 'Meanwhile you can change your settings',
   noWifis: 'No hotspots were found',
   wifiListFailedMessage: 'Error while scanning for available hotspots',
-  wifiDisabledMessage: 'Turn on wi-fi to continue'
+  wifiDisabledMessage: 'Turn on wi-fi to continue',
+  timeFormat: {
+    sameDay: '[Today at] hh:mm a',
+    nextDay: '[Tomorrow]',
+    nextWeek: '[Next week]',
+    lastDay: '[Yesterday at] hh:mm a',
+    lastWeek: '[Last] dddd [at] hh:mm a',
+    sameElse: ' hh:mm a mm/dd/yyyy'
+  }
 };

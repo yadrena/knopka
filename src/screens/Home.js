@@ -44,6 +44,7 @@ class Home extends Component {
   };
 
   onRemove = () => {
+    console.log('Rmoev!');
     this.props.popNotification();
   };
 

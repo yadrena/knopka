@@ -31,5 +31,13 @@ export default {
   homeEmptyLower: '...а пока можно перейти\nв Настройки, чтобы\nуказать его кличку\nи добавить фотографию.',
   noWifis: 'Wi-fi сети не найдены',
   wifiListFailedMessage: 'Ошибка при поиске Wi-fi сетей',
-  wifiDisabledMessage: 'Включите Wi-fi чтобы продолжить'
+  wifiDisabledMessage: 'Включите Wi-fi чтобы продолжить',
+  timeFormat: {
+    sameDay: '[Сегодня в] HH:mm',
+    nextDay: '[Завтра]',
+    nextWeek: 'dddd',
+    lastDay: '[Вчера в] HH:mm',
+    lastWeek: '[Прошлый] dddd [в] HH:mm',
+    sameElse: 'HH:mm DD/MM/YYYY'
+  }
 };
