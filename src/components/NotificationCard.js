@@ -12,30 +12,23 @@ export default class NotificationCard extends React.Component {
   };
 
   render() {
-    return (
-      this.props.depth == 0 ? this.renderTop() : this.renderBlank()
-    );
-  }
-
-  renderTop = () => {
+    console.log('Render card', this.props);
     return (
       <TouchableWithoutFeedback onLongPress={this.props.onRemove}>
         <View style={[styles.card, this.getOwnStyle()]}>
           <Avatar avatar={this.props.avatar}/>
           <Text style={styles.nickname}>{this.props.nickname}</Text>
           <Text style={styles.message}>{this.props.notification.message}</Text>
+          <Text style={styles.message}>{this.props.depth + ' depth'}</Text>
         </View>
       </TouchableWithoutFeedback>
     );
-  };
-
-  renderBlank = () => {
-    return <View style={[styles.card, this.getOwnStyle()]}/>
-  };
+  }
 
   getOwnStyle = () => {
     const depth = this.props.depth;
     return {
+      elevation: (3-depth),
       top: (3 - depth) * STEP,
       left: depth * STEP,
       right: depth * STEP,

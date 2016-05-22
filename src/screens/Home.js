@@ -5,9 +5,8 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import {popNotification} from '../actions/Actions';
 import commonStyles from '../styles/common';
 import WorkScreen from './WorkScreen';
-import NotificationCard from '../components/NotificationCard';
+import CardStack from '../components/CardStack';
 import I18n from 'react-native-i18n';
-import _ from 'lodash';
 
 class Home extends Component {
   static propTypes = {
@@ -37,22 +36,9 @@ class Home extends Component {
 
   renderStack = (righty) => {
     const {notifications,avatar,nickname} = this.props;
-    const lastThree = _.takeRight(notifications, 3);
-    const content = [];
-    for (let i = 0; i < lastThree.length; i++) {
-      let note = lastThree[i];
-      let d = lastThree.length - 1 - i;
-      content.push(
-        <NotificationCard key={'note'+i} depth={d} notification={note}
-                          avatar={avatar} nickname={nickname}
-                          onRemove={this.onRemove}/>
-      );
-    }
     return (
       <WorkScreen righty={righty} lefty={null} contentStyle={{justifyContent: 'flex-start'}}>
-        <View style={styles.stack}>
-          {content}
-        </View>
+        <CardStack {...{notifications,avatar,nickname}} onRemove={this.onRemove}/>
       </WorkScreen>
     );
   };
