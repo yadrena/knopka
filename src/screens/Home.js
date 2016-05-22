@@ -51,13 +51,19 @@ class Home extends Component {
 
     return (
       <WorkScreen righty={righty} lefty={null}>
-        <Text style={[commonStyles.text, styles.label]}>
-          {I18n.t('homeEmptyUpper')}
-        </Text>
-        <Image key='dog' source={require('../assets/dog.png')}/>
-        <Text style={[commonStyles.text, styles.label]}>
-          {I18n.t('homeEmptyLower')}
-        </Text>
+        <View style={styles.third}>
+          <Text style={[commonStyles.text, styles.label]}>
+            {I18n.t('homeEmptyUpper')}
+          </Text>
+        </View>
+        <View style={styles.third}>
+          <Image key='dog' source={require('../assets/dog.png')}/>
+        </View>
+        <View style={styles.third}>
+          <Text style={[commonStyles.text, styles.label]}>
+            {I18n.t('homeEmptyLower')}
+          </Text>
+        </View>
       </WorkScreen>
     );
   };
@@ -68,12 +74,17 @@ export default connect(Home.mapStateToProps, {popNotification})(Home);
 
 const styles = StyleSheet.create({
   label: {
-    textAlign: 'center',
-    margin: 16
+    fontSize: 20,
+    textAlign: 'center'
   },
   stack: {
     justifyContent: 'center',
     alignItems: 'stretch',
     padding: 0
+  },
+  third: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
