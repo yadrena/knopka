@@ -18,10 +18,13 @@ export default class CardStack extends React.Component {
     for (let i = 0; i < lastThree.length; i++) {
       let note = lastThree[i];
       let d = lastThree.length - 1 - i;
+      const cardStyle = {backgroundColor: CARD_COLORS[d]};
       content.push(
-        <NotificationCard key={'note'+i} depth={d} notification={note}
-                          avatar={avatar} nickname={nickname}
-                          onRemove={onRemove} style={this.getCardStyle(d)}/>
+        <View style={this.getCardStyle(d)} key={'card'+note.timestamp} >
+          <NotificationCard depth={d} notification={note}
+                            avatar={avatar} nickname={nickname}
+                            onRemove={onRemove} style={cardStyle}/>
+        </View>
       );
     }
 
@@ -36,21 +39,17 @@ export default class CardStack extends React.Component {
     const stackPos = 3 - depth;
     const scale = 1 - 0.1 * depth;
     return {
-      elevation: stackPos,
+      position: 'absolute',
+      elevation: 1 + stackPos,
       transform: [
         {scale},
         {translateX: 70 + STEP * depth},
         {translateY: -200 - 6 * STEP * depth / scale }
-      ],
-      backgroundColor: CARD_COLORS[depth],
-      width: CARDW,
-      height: CARDH
+      ]
     };
   }
 }
 
-const CARDW = 250;
-const CARDH = 400;
 const STEP = 8;
 const CARD_COLORS = ['#d8d8d8', '#cccccc', '#a8a8a8'];
 
@@ -58,6 +57,7 @@ const styles = StyleSheet.create({
   stack: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: 'pink'
   }
 });
