@@ -67,11 +67,11 @@ function updateFirebase(){
   return (dispatch, getState) => {
     let authenticated = firebase.getAuth() !== null;
     let auth = getState().auth;
-    if (!auth){
+    if (!auth.userData){
       console.warn('Wants to save in firebase, but not authenticated in app');
       return;
     }
-    console.log('Updating firebase', authenticated);
+    console.log('Updating firebase', authenticated, auth);
     const uid = auth.userData.uid;
     const data = {email: auth.userData.password.email, gcmToken: auth.gcmToken};
     if (!authenticated) {
