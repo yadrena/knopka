@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import CaesarLogo from '../components/CaesarLogo';
 import Button from 'apsl-react-native-button';
 import commonStyles, {buttonStyle, linkStyle, loginScreensStyle} from '../styles/common';
@@ -28,15 +28,19 @@ export default class SimpleScreen extends React.Component {
         <CaesarLogo big={this.props.bigLogo}/>
         {
           this.props.header !== '' &&
-          <Text style={commonStyles.header}>
-            {this.props.header}
-          </Text>
+          <View style={styles.header}>
+            <Text style={commonStyles.header}>
+              {this.props.header}
+            </Text>
+          </View>
         }
         {
           this.props.message !== '' &&
-          <Text style={commonStyles.text}>
-            {this.props.message}
-          </Text>
+          <View style={styles.message}>
+            <Text style={[commonStyles.text, {fontSize: 18}]}>
+              {this.props.message}
+            </Text>
+          </View>
         }
         <Button onPress={this.onButtonPress} {...btnStyle}>
           {this.props.buttonText}
@@ -50,3 +54,18 @@ export default class SimpleScreen extends React.Component {
     this.props.onButtonPress();
   }
 }
+
+const styles = StyleSheet.create({
+  header: {
+    flex: 1,
+    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  message: {
+    flex: 2,
+    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+});
