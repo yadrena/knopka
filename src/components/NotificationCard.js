@@ -18,7 +18,7 @@ export default class NotificationCard extends React.Component {
     const timestamp = this.props.notification.timestamp;
     const time = moment(timestamp).calendar(null, i18n.t('timeFormat'));
     return (
-      <TouchableWithoutFeedback onLongPress={this.props.onRemove}>
+      <TouchableWithoutFeedback onPress={this.props.onRemove}>
         <View style={[styles.card, this.props.style]}>
           <Avatar avatar={this.props.avatar}/>
           <Text style={styles.nickname}>{this.props.nickname}</Text>
@@ -33,7 +33,6 @@ export default class NotificationCard extends React.Component {
 const styles = StyleSheet.create({
   card: {
     position: 'absolute',
-    flex: 1,
     alignItems: 'center',
     paddingVertical: 20,
     justifyContent: 'space-around',

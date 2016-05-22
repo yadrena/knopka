@@ -39,8 +39,8 @@ export default class CardStack extends React.Component {
       elevation: stackPos,
       transform: [
         {scale},
-        {translateX: 2 * STEP},
-        {translateY: STEP - 3.6 * STEP * depth / scale }
+        {translateX: 70 + STEP * depth},
+        {translateY: -200 - 6 * STEP * depth / scale }
       ],
       backgroundColor: CARD_COLORS[depth],
       width: CARDW,
@@ -56,7 +56,8 @@ const CARD_COLORS = ['#d8d8d8', '#cccccc', '#a8a8a8'];
 
 const styles = StyleSheet.create({
   stack: {
-    width: CARDW + 4 * STEP,
-    height: CARDH + 4 * STEP
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });

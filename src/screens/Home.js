@@ -37,14 +37,13 @@ class Home extends Component {
   renderStack = (righty) => {
     const {notifications,avatar,nickname} = this.props;
     return (
-      <WorkScreen righty={righty} lefty={null} contentStyle={{justifyContent: 'flex-start'}}>
+      <WorkScreen righty={righty} lefty={null} contentStyle={styles.stack}>
         <CardStack {...{notifications,avatar,nickname}} onRemove={this.onRemove}/>
       </WorkScreen>
     );
   };
 
   onRemove = () => {
-    console.log('Rmoev!');
     this.props.popNotification();
   };
 
@@ -73,7 +72,8 @@ const styles = StyleSheet.create({
     margin: 16
   },
   stack: {
-    width: 250,
-    height: 450
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    padding: 0
   }
 });
