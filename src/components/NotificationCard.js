@@ -16,15 +16,18 @@ export default class NotificationCard extends React.Component {
   render() {
     const timestamp = this.props.notification.timestamp;
     const time = moment.unix(timestamp).calendar(undefined, i18n.t('timeFormat'));
-    console.log(timestamp, time, i18n.t('timeFormat'));
+    //console.log(timestamp, time, i18n.t('timeFormat'));
     return (
       <TouchableWithoutFeedback>
         <View style={[styles.card, this.props.style]}>
           <Avatar avatar={this.props.avatar}/>
-          <View style={styles.nickBox}>
-            <Text style={styles.nickname}>{this.props.nickname}</Text>
-          </View>
-          <Text style={styles.message}>{this.props.notification.message}</Text>
+          {
+            this.props.nickname &&
+            <View style={styles.nickBox}>
+              <Text style={styles.nickname}>{this.props.nickname}</Text>
+            </View>
+          }
+          <Text style={styles.message}>{i18n.t(`home.cards.${this.props.notification.code}`)}</Text>
           <Text style={styles.timestamp}>{time}</Text>
         </View>
       </TouchableWithoutFeedback>
