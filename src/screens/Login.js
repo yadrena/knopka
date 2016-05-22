@@ -25,17 +25,17 @@ class Login extends Component {
       <View style={loginScreensStyle.rootContainer}>
         <CaesarLogo big={true}/>
         <View style={loginScreensStyle.middleContainer}>
-          <TextInput placeholder={I18n.t('email')} keyboardType="email-address" value={this.state.email}
+          <TextInput placeholder={I18n.t('commons.email')} keyboardType="email-address" value={this.state.email}
                      {...inputStyle}
                      onChangeText={(text) => this.setState({email: text})}/>
-          <TextInput placeholder={I18n.t('password')} secureTextEntry={true} value={this.state.password}
+          <TextInput placeholder={I18n.t('commons.password')} secureTextEntry={true} value={this.state.password}
                      {...inputStyle}
                      onChangeText={(text) => this.setState({password: text})}/>
           <View style={{height: 8}}/>
-          <Button onPress={this.onLogin} {...buttonStyle}>{I18n.t('loginButton')}</Button>
-          <Button onPress={Actions.reqRecover} {...linkStyle}>{I18n.t('recoverPassword')}</Button>
+          <Button onPress={this.onLogin} {...buttonStyle}>{I18n.t('login.button')}</Button>
+          <Button onPress={Actions.reqRecover} {...linkStyle}>{I18n.t('login.recover')}</Button>
         </View>
-        <Button onPress={Actions.register} {...linkStyle}>{I18n.t('registerButton')}</Button>
+        <Button onPress={Actions.register} {...linkStyle}>{I18n.t('login.register')}</Button>
       </View>
     );
   }

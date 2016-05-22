@@ -39,7 +39,7 @@ class ConnectMat extends React.Component {
     return (
       <WorkScreen>
         <View style={{flex: 1, justifyContent: 'flex-end'}}>
-          <Text style={[commonStyle.header, {marginBottom: 24}]}>{I18n.t('wifiLookup')}</Text>
+          <Text style={[commonStyle.header, {marginBottom: 24}]}>{I18n.t('connectMat.header')}</Text>
         </View>
         <View style={{flex: 2, justifyContent: 'flex-start'}}>
           {content}
@@ -59,7 +59,7 @@ class ConnectMat extends React.Component {
 
   renderLoading = () => {
     return (
-      <BusyIndicator message={I18n.t('wifiScan')}/>
+      <BusyIndicator message={I18n.t('connectMat.busyMessage')}/>
     );
   };
 
@@ -68,11 +68,11 @@ class ConnectMat extends React.Component {
     const result = [this.renderList()];
     if (list.length > 0){
       result.push(
-        <TextInput key="passwordInput" placeholder={I18n.t('password')} secureTextEntry={true} value={this.state.password}
+        <TextInput key="passwordInput" placeholder={I18n.t('commons.password')} secureTextEntry={true} value={this.state.password}
           {...inputStyle} onChangeText={password => this.setState({password})}/>
       );
       result.push(
-        <Button key="connectButton" onPress={this.onConnectPressed} {...buttonStyle}>{I18n.t('connect')}</Button>
+        <Button key="connectButton" onPress={this.onConnectPressed} {...buttonStyle}>{I18n.t('connectMat.connect')}</Button>
       )
     }
     return result;
@@ -92,14 +92,14 @@ class ConnectMat extends React.Component {
     if (list.length > 0){
       const wifis = list.map(v => <Picker.Item key={v.ssid} label={v.ssid} value={v}/>);
       return (
-        <Picker selectedValue={this.state.wifi} prompt={I18n.t('wifiLookup')} mode="dialog"
+        <Picker selectedValue={this.state.wifi} prompt={I18n.t('connectMat.picker')} mode="dialog"
                 onValueChange={wifi => this.setState({wifi})} style={styles.picker}>
           {wifis}
         </Picker>
       );
     }
     else {
-      return <Text style={commonStyle.text}>{I18n.t('noWifis')}</Text>;
+      return <Text style={commonStyle.text}>{I18n.t('connectMat.noWifis')}</Text>;
     }
   };
 

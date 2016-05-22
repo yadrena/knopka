@@ -21,16 +21,16 @@ class Settings extends React.Component {
 
   render() {
     const lefty = {
-      title: I18n.t('backButton'),
+      title: I18n.t('settings.back'),
       action: Actions.pop
     };
     return (
       <WorkScreen lefty={lefty}>
         <Avatar avatar={this.props.avatar} onPress={this.onCameraPress}/>
-        <TextInput placeholder={I18n.t('nickname')} value={this.props.nickname} {...inputStyle}
+        <TextInput placeholder={I18n.t('settings.nickname')} value={this.props.nickname} {...inputStyle}
                    onChangeText={this.props.setNickname}/>
         <View style={styles.switchHolder}>
-          <Text style={commonStyles.text}>{I18n.t('receivePush')}</Text>
+          <Text style={commonStyles.text}>{I18n.t('settings.receivePush')}</Text>
           <Switch onValueChange={this.props.setReceivePush}
                   value={this.props.receivePush}/>
         </View>
@@ -64,10 +64,10 @@ class Settings extends React.Component {
 export default connect(Settings.mapStateToProps, {setAvatar, setNickname, setReceivePush})(Settings);
 
 const cameraOptions = {
-  title: I18n.t('cameraTitle'), // specify null or empty string to remove the title
-  cancelButtonTitle: I18n.t('cameraCancel'),
-  takePhotoButtonTitle: I18n.t('cameraTakePhoto'), // specify null or empty string to remove this button
-  chooseFromLibraryButtonTitle: I18n.t('cameraLibrary'), // specify null or empty string to remove this button
+  title: I18n.t('settings.camera.title'), // specify null or empty string to remove the title
+  cancelButtonTitle: I18n.t('settings.camera.cancel'),
+  takePhotoButtonTitle: I18n.t('settings.camera.takePhoto'), // specify null or empty string to remove this button
+  chooseFromLibraryButtonTitle: I18n.t('settings.camera.library'), // specify null or empty string to remove this button
   cameraType: 'front', // 'front' or 'back'
   mediaType: 'photo', // 'photo' or 'video'
   maxWidth: 500, // photos only

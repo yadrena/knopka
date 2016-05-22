@@ -26,15 +26,15 @@ class Register extends Component {
       <View style={loginScreensStyle.rootContainer}>
         <CaesarLogo big={true}/>
         <View style={loginScreensStyle.middleContainer}>
-          <TextInput placeholder={I18n.t('email')} keyboardType="email-address" value={this.state.email}
+          <TextInput placeholder={I18n.t('commons.email')} keyboardType="email-address" value={this.state.email}
             {...inputStyle}
                      onChangeText={(text) => this.setState({email: text})}/>
-          <TextInput placeholder={I18n.t('password')} secureTextEntry={true} value={this.state.password}
+          <TextInput placeholder={I18n.t('commons.password')} secureTextEntry={true} value={this.state.password}
             {...inputStyle}
                      onChangeText={(text) => this.setState({password: text})}/>
-          <Button onPress={this.onRegister} {...buttonStyle}>{I18n.t('registerButton')}</Button>
+          <Button onPress={this.onRegister} {...buttonStyle}>{I18n.t('register.button')}</Button>
         </View>
-        <Button onPress={Actions.pop} {...linkStyle}>{I18n.t('alreadyRegistered')}</Button>
+        <Button onPress={Actions.pop} {...linkStyle}>{I18n.t('register.login')}</Button>
       </View>
     );
   }

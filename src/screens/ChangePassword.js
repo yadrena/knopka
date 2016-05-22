@@ -38,16 +38,16 @@ class ChangePassword extends React.Component {
       <View style={loginScreensStyle.rootContainer}>
         <CaesarLogo big={true}/>
         <View style={loginScreensStyle.middleContainer}>
-          <TextInput placeholder={I18n.t('email')} keyboardType="email-address" value={email}
+          <TextInput placeholder={I18n.t('commons.email')} keyboardType="email-address" value={email}
                      {...inputStyle} onChangeText={(text) => this.setState({email: text})}/>
-          <TextInput placeholder={I18n.t('oldPassword')} value={oldPassword}
+          <TextInput placeholder={I18n.t('changePassword.oldPassword')} value={oldPassword}
                      {...inputStyle} onChangeText={(text) => this.setState({oldPassword: text})}/>
-          <TextInput placeholder={I18n.t('newPassword')} secureTextEntry={true} value={newPassword}
+          <TextInput placeholder={I18n.t('changePassword.newPassword')} secureTextEntry={true} value={newPassword}
                      {...inputStyle} onChangeText={(text) => this.setState({newPassword: text})}/>
           <View style={{height: 8}}/>
-          <Button onPress={() => changePassword(email, oldPassword, newPassword)} {...buttonStyle}>{I18n.t('changePasswordButton')}</Button>
+          <Button onPress={() => changePassword(email, oldPassword, newPassword)} {...buttonStyle}>{I18n.t('changePassword.change')}</Button>
         </View>
-        <Button onPress={Actions.login} {...linkStyle}>{I18n.t('loginButton')}</Button>
+        <Button onPress={Actions.login} {...linkStyle}>{I18n.t('changePassword.login')}</Button>
       </View>
     );
   }

@@ -144,12 +144,12 @@ export function checkWifi(){
             dispatch(wifiListed(wifiArray));
           },
           (error) => {
-            dispatch(wifiListFailed(I18n.t('wifiListFailedMessage')));
+            dispatch(wifiListFailed(I18n.t('errors.wifi.listFailed')));
             console.log('Wifi lis error: ', error);
           }
         );
       } else {
-        dispatch(wifiListFailed(I18n.t('wifiDisabledMessage')));
+        dispatch(wifiListFailed(I18n.t('errors.wifi.disabled')));
         console.log("wifi service is disabled");
       }
     });

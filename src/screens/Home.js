@@ -25,7 +25,7 @@ class Home extends Component {
   render() {
     const notifications = this.props.notifications;
     const righty = {
-      title: I18n.t('settings'),
+      title: I18n.t('home.settings'),
       action: Actions.settings
     };
     if (notifications.length > 0)
@@ -53,7 +53,7 @@ class Home extends Component {
       <WorkScreen righty={righty} lefty={null}>
         <View style={styles.third}>
           <Text style={[commonStyles.text, styles.label]}>
-            {I18n.t('homeEmptyUpper')}
+            {I18n.t('home.topLabel')}
           </Text>
         </View>
         <View style={styles.third}>
@@ -61,7 +61,7 @@ class Home extends Component {
         </View>
         <View style={styles.third}>
           <Text style={[commonStyles.text, styles.label]}>
-            {I18n.t('homeEmptyLower')}
+            {I18n.t('home.bottomLabel')}
           </Text>
         </View>
       </WorkScreen>

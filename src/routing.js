@@ -16,29 +16,29 @@ export default (workScreens, home) => Actions.create(
       <Scene key="login" component={Login} initial={true}/>
       <Scene key="register" component={Register} />
       <Scene key="thanks" component={SimpleScreen}
-             header={i18n.t('regThanks')} buttonText={i18n.t('regThanksLink')}
+             header={i18n.t('thanks.header')} buttonText={i18n.t('thanks.button')}
              onButtonPress={() => Actions.workScreens()}/>
       <Scene key="reqRecover" component={RequestRecover} />
       <Scene key="recoverManual" component={SimpleScreen}
-             header={i18n.t('recoverManualHeader')}
-             message={i18n.t('recoverManualMessage')}
-             buttonText={i18n.t('next')}
+             header={i18n.t('recoverManual.header')}
+             message={i18n.t('recoverManual.message')}
+             buttonText={i18n.t('commons.next')}
              onButtonPress={() => Actions.changePassword()}/>
       <Scene key="changePassword" component={ChangePassword} type="replace"/>
       <Scene key="passwordChanged" component={SimpleScreen}
-             header={i18n.t('passwordChangedHeader')}
-             buttonText={i18n.t('next')}
+             header={i18n.t('passwordChanged.header')}
+             buttonText={i18n.t('commons.next')}
              onButtonPress={() => Actions.workScreens()}/>
     </Scene>
     <Scene key="workScreens" hideNavBar={true} initial={workScreens}>
       <Scene key="wifiManual" component={SimpleScreen} initial={!home}
-             message={i18n.t('wifiManual')}  buttonStyle="button"
-             buttonText={i18n.t('next')} bigLogo={false}
+             message={i18n.t('wifiManual.message')}  buttonStyle="button"
+             buttonText={i18n.t('commons.next')} bigLogo={false}
              onButtonPress={() => Actions.connectMat()}/>
       <Scene key="connectMat" component={ConnectMat}/>
       <Scene key="connectingMat" component={SimpleScreen}
-             header={i18n.t('connecting.header')}
-             message={i18n.t('connecting.message')}
+             header={i18n.t('connectingMat.header')}
+             message={i18n.t('connectingMat.message')}
              bigLogo={false}/>
       <Scene key="connectionFailed" component={SimpleScreen}
              header={i18n.t('connectionFail.header')}
