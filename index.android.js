@@ -12,4 +12,6 @@ const reactotronOpts = {
 
 Reactotron.connect(reactotronOpts);
 
+console.ignoredYellowBox = ['Warning: Failed propType: SceneView'];
+
 AppRegistry.registerComponent('knopka', () => App);

@@ -68,11 +68,11 @@ class ConnectMat extends React.Component {
     const result = [this.renderList()];
     if (list.length > 0){
       result.push(
-        <TextInput placeholder={I18n.t('password')} secureTextEntry={true} value={this.state.password}
+        <TextInput key="passwordInput" placeholder={I18n.t('password')} secureTextEntry={true} value={this.state.password}
           {...inputStyle} onChangeText={password => this.setState({password})}/>
       );
       result.push(
-        <Button onPress={this.onConnectPressed} {...buttonStyle}>{I18n.t('connect')}</Button>
+        <Button key="connectButton" onPress={this.onConnectPressed} {...buttonStyle}>{I18n.t('connect')}</Button>
       )
     }
     return result;
@@ -80,7 +80,7 @@ class ConnectMat extends React.Component {
 
   renderList = () => {
     return (
-      <View style={styles.listGroup}>
+      <View key='pickerGroup' style={styles.listGroup}>
         {this.renderPicker()}
         <Icon.Button name="refresh" backgroundColor="#101010" onPress={this.props.checkWifi}/>
       </View>
