@@ -29,14 +29,16 @@ export default class NotificationCard extends React.Component {
   }
 }
 
+export const CARD_SIZE = {width: 250, height: 400};
+
 const styles = StyleSheet.create({
   card: {
     alignItems: 'center',
     paddingVertical: 20,
     justifyContent: 'space-around',
     borderRadius: 5,
-    width: 250,
-    height: 400
+    width: CARD_SIZE.width,
+    height: CARD_SIZE.height
   },
   nickname: {
     color: 'black',
