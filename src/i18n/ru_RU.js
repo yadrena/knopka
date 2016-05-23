@@ -87,6 +87,7 @@ export default {
     }
   },
   errors: {
+    network: 'Ошибка соединения',
     wifi: {
       listFailed: 'Ошибка при поиске Wi-fi сетей',
       disabled: 'Включите Wi-fi чтобы продолжить'

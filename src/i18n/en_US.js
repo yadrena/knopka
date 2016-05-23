@@ -87,6 +87,7 @@ export default {
     }
   },
   errors: {
+    network: 'Network error',
     wifi: {
       listFailed: 'Error while scanning for available hotspots',
       disabled: 'Turn on wi-fi to continue'
