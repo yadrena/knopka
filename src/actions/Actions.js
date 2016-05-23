@@ -78,11 +78,11 @@ function updateFirebase(){
     if (!authenticated) {
       const rehydratedFirbaseToken = auth.userData.token;
       firebase.authWithCustomToken(rehydratedFirbaseToken)
-        .then(() => firebase.child("users").child(uid).set(data))
+        .then(() => firebase.child("users").child(uid).update(data))
         .catch(error => console.warn('Firebase rehydration failed: ' + error));
     }
     else {
-      firebase.child("users").child(uid).set(data);
+      firebase.child("users").child(uid).update(data);
     }
   }
 }
