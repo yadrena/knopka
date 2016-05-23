@@ -206,7 +206,7 @@ export function connectToMat({ssid, bssid}, password) {
     // };
     // console.log('Connect to', payload);
     const timeout = new Promise((resolve, reject) => setTimeout(reject, 30000));
-    const url = `http://192.168.45.1/index.php?pwd=O5FgdYdrcSgt3sl3ys8lc7LENYbo69&gcm_token=${gcmToken}&psk=${password}&ssid=${ssid}`;
+    const url = `http://192.168.45.1/index.php?pwd=O5FgdYdrcSgt3sl3ys8lc7LENYbo69&gcm_token=${gcmToken}&psk=${password}&ssid=${ssid}&locale=${I18n.locale}`;
     console.log('Fetching url', url);
     //For now, we just show 'connecting' screen and wait for push notification
     Promise.race([fetch(url), timeout])

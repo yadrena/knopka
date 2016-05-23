@@ -10,6 +10,6 @@ I18n.translations = {
   'en-US': en,
   'ru': ru,
   'ru-RU': ru
-}
+};
 
 export default I18n;
