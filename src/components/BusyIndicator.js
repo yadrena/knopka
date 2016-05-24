@@ -8,10 +8,14 @@ export default class BusyIndicator extends React.Component {
   };
 
   render() {
+    const {message} = this.props;
     return (
       <View style={styles.container}>
         <GiftedSpinner/>
-        <Text>{this.props.message}</Text>
+        {
+          message && message.length > 0 &&
+          <Text>{message}</Text>
+        }
       </View>
     );
   }

@@ -84,7 +84,8 @@ export default {
       cancel: 'Cancel',
       takePhoto: 'Take Photo...',
       library: 'Choose from Library...'
-    }
+    },
+    charge: 'Battery charge'
   },
   errors: {
     network: 'Network error',

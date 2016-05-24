@@ -13,6 +13,8 @@ const userLoggedIn = createAction(ActionTypes.USER_LOGGED_IN);
 const wifiListed = createAction(ActionTypes.WIFI_LISTED);
 const wifiListFailed = createAction(ActionTypes.WIFI_LIST_FAILED);
 const setHomeWifi = createAction(ActionTypes.WIFI_HOME_SELECTED);
+const batteryRequest = createAction(ActionTypes.BATTERY_REQUEST);
+const batteryResponse = createAction(ActionTypes.BATTERY_RESPONSE);
 
 export const setLastInitialURL = createAction(ActionTypes.SET_LAST_INITIAL_URL);
 export const setAvatar = createAction(ActionTypes.SET_AVATAR);
@@ -81,27 +83,30 @@ export function login(email, password, thanks = false, recovery = false) {
 
 function updateFirebase() {
   return (dispatch, getState) => {
-    let authenticated = firebase.getAuth() !== null;
-    let auth = getState().auth;
-    if (!auth.userData) {
-      console.warn('Wants to save in firebase, but not authenticated in app');
-      return;
-    }
-    console.log('Updating firebase', authenticated, auth);
-    const uid = auth.userData.uid;
-    const data = {email: auth.userData.password.email, gcmToken: auth.gcmToken};
-    checkNetAvailability()
-      .then(() => {
-        if (!authenticated) {
-          const rehydratedFirbaseToken = auth.userData.token;
-          firebase.authWithCustomToken(rehydratedFirbaseToken)
-            .then(() => firebase.child("users").child(uid).update(data))
-            .catch(error => console.warn('Firebase rehydration failed: ' + error));
-        }
-        else {
-          firebase.child("users").child(uid).update(data);
-        }
-      });
+    checkNetAvailability().then(() => {
+      const auth = getState().auth;
+      const uid = auth.userData.uid;
+      const data = {email: auth.userData.password.email, gcmToken: auth.gcmToken};
+      return rehydrateFirebaseAuth(getState)
+        .then(() => firebase.child("users").child(uid).update(data))
+        .catch(error => console.warn('Firebase rehydration failed: ' + error));
+    });
+  }
+}
+
+function rehydrateFirebaseAuth(getState) {
+  let authenticated = firebase.getAuth() !== null;
+  let auth = getState().auth;
+  if (!auth.userData) {
+    console.warn('Wants to save in firebase, but not authenticated in app');
+    return Promise.reject();
+  }
+  else if (authenticated){
+    return Promise.resolve();
+  }
+  else {
+    const rehydratedFirbaseToken = auth.userData.token;
+    return firebase.authWithCustomToken(rehydratedFirbaseToken);
   }
 }
 
@@ -231,6 +236,30 @@ export function hardwareBack() {
       Actions.pop();
     }
   }
+}
+
+export function checkBattery() {
+  return (dispatch, getState) => {
+    checkNetAvailability()
+      .then(() => {
+        dispatch(batteryRequest());
+        return rehydrateFirebaseAuth(getState);
+      })
+      .then(() => {
+        const uid = getState().auth.userData.uid;
+        return firebase.child("users").child(uid).once('value')
+      })
+      .then( dataSnapshot => {
+        let charge = dataSnapshot.val().charge;
+        charge = charge === undefined ? 100 : charge;
+        dispatch(batteryResponse(charge));
+      })
+      .catch((error) => {
+        //Like nothing happened!
+        console.log('Battery check error', error);
+        dispatch(batteryResponse(getState().settings.battery.charge));
+      });
+  };
 }
 
 function checkNetAvailability() {

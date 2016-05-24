@@ -2,10 +2,11 @@ import React, {PropTypes} from 'react'
 import {View, Text, TextInput, Switch, Image, TouchableWithoutFeedback, StyleSheet, NativeModules} from 'react-native';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
-import {setAvatar, setNickname, setReceivePush} from '../actions/Actions';
+import {setAvatar, setNickname, setReceivePush, checkBattery} from '../actions/Actions';
 import commonStyles, {inputStyle} from '../styles/common';
 import WorkScreen from './WorkScreen';
 import Avatar from '../components/Avatar';
+import Battery from '../components/Battery';
 import I18n from '../i18n/i18n';
 
 const ImagePickerManager = NativeModules.ImagePickerManager;
@@ -14,10 +15,19 @@ class Settings extends React.Component {
   static propTypes = {
     avatar: PropTypes.object,
     nickname: PropTypes.string,
-    receivePush: PropTypes.bool
+    receivePush: PropTypes.bool,
+    setAvatar: PropTypes.func,
+    setNickname: PropTypes.func,
+    setReceivePush: PropTypes.func,
+    checkBattery: PropTypes.func,
+    battery: PropTypes.object
   };
 
   static mapStateToProps = state => ({...state.settings});
+
+  componentDidMount(){
+    this.props.checkBattery();
+  }
 
   render() {
     const lefty = {
@@ -26,13 +36,16 @@ class Settings extends React.Component {
     };
     return (
       <WorkScreen lefty={lefty}>
-        <Avatar avatar={this.props.avatar} onPress={this.onCameraPress}/>
-        <TextInput placeholder={I18n.t('settings.nickname')} value={this.props.nickname} {...inputStyle}
-                   onChangeText={this.props.setNickname}/>
-        <View style={styles.switchHolder}>
-          <Text style={commonStyles.text}>{I18n.t('settings.receivePush')}</Text>
-          <Switch onValueChange={this.props.setReceivePush}
-                  value={this.props.receivePush}/>
+        <View style={styles.container}>
+          <Avatar avatar={this.props.avatar} onPress={this.onCameraPress}/>
+          <TextInput placeholder={I18n.t('settings.nickname')} value={this.props.nickname} {...inputStyle}
+                     onChangeText={this.props.setNickname}/>
+          <View style={styles.switchHolder}>
+            <Text style={commonStyles.text}>{I18n.t('settings.receivePush')}</Text>
+            <Switch onValueChange={this.props.setReceivePush}
+                    value={this.props.receivePush}/>
+          </View>
+          <Battery loading={this.props.battery.loading} charge={this.props.battery.charge}/>
         </View>
       </WorkScreen>
     );
@@ -61,7 +74,7 @@ class Settings extends React.Component {
   }
 }
 
-export default connect(Settings.mapStateToProps, {setAvatar, setNickname, setReceivePush})(Settings);
+export default connect(Settings.mapStateToProps, {setAvatar, setNickname, setReceivePush, checkBattery})(Settings);
 
 const cameraOptions = {
   title: I18n.t('settings.camera.title'), // specify null or empty string to remove the title
@@ -86,13 +99,14 @@ const cameraOptions = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    alignItems: 'center'
   },
   switchHolder: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginHorizontal: 16
+    marginHorizontal: 16,
+    marginTop: 16
   }
 });

@@ -84,7 +84,8 @@ export default {
       cancel: 'Отмена',
       takePhoto: 'Сфотографировать...',
       library: 'Выбрать из библиотеки...'
-    }
+    },
+    charge: 'Заряд батареи'
   },
   errors: {
     network: 'Ошибка соединения',
