@@ -8,11 +8,11 @@ export default function reducer(state = initialState, action) {
   const payload = action.payload;
   switch (action.type) {
     case ActionTypes.ADD_NOTIFICATION:
-      return _.uniqBy([...state, payload], 'timestamp');
+      return _.sortBy(_.uniqBy([...state, payload], 'timestamp'), 'timestamp');
     case ActionTypes.POP_NOTIFICATION:
       return state.slice(0, -1);
     case ActionTypes.SWIPE_NOTIFICATION:
-      return state.slice(-1, 3).concat(state.slice(0, -1));
+      return [state[state.length-1]].concat(state.slice(0, -1));
     default:
       return state;
   }
