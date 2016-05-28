@@ -58,22 +58,7 @@ export default {
   home: {
     settings: 'Settings',
     topLabel: 'Your pet is not missing you',
-    bottomLabel: 'Meanwhile you can change your settings',
-    cards: {
-      "0": 'Hi! Just checking.',
-      "1": 'You’ll come home straight away, right?',
-      "2": 'Hi! Do you miss me? You do?! I do. So much.',
-      "3": 'Nobody has stroked me for such a VERY long time.',
-      "4": 'I really fancy a tummy rub right now.',
-      "5": 'Come home! Let\'s play a game of «catch» together.',
-      "6": 'You know, the day we first met was the best day of my life.',
-      "7": 'Wish you were here. We could have so much fun.',
-      "8": 'None of my toys makes me happy without you.',
-      "9": 'So quiet at home without you. I miss your company.',
-      "10": 'My favourite sound is the sound of the key turning in the lock.',
-      "11": 'Are you seeing another dog?',
-      "-1": 'I will be fine'
-    }
+    bottomLabel: 'Meanwhile you can change your settings'
   },
   settings: {
     back: 'Back',
