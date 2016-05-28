@@ -6,6 +6,8 @@ import {popNotification} from '../actions/Actions';
 import commonStyles from '../styles/common';
 import WorkScreen from './WorkScreen';
 import CardStack from '../components/CardStack';
+import Avatar from '../components/Avatar';
+import Nickname from '../components/Nickname';
 import I18n from 'react-native-i18n';
 
 class Home extends Component {
@@ -48,6 +50,27 @@ class Home extends Component {
   };
 
   renderPlaceholder = (righty) => {
+    let content;
+    if (this.props.avatar === null){
+      content = [
+        <View key="dog" style={styles.third}>
+          <Image source={require('../assets/dog.png')}/>
+        </View>,
+        <View key="bottomLabel" style={styles.third}>
+          <Text style={[commonStyles.text, styles.label]}>
+            {I18n.t('home.bottomLabel')}
+          </Text>
+        </View>
+      ];
+    }
+    else {
+      content = (
+        <View style={styles.half}>
+          <Avatar avatar={this.props.avatar}/>
+          <Nickname nickname={this.props.nickname}/>
+        </View>
+      );
+    }
 
     return (
       <WorkScreen righty={righty} lefty={null}>
@@ -56,14 +79,7 @@ class Home extends Component {
             {I18n.t('home.topLabel')}
           </Text>
         </View>
-        <View style={styles.third}>
-          <Image key='dog' source={require('../assets/dog.png')}/>
-        </View>
-        <View style={styles.third}>
-          <Text style={[commonStyles.text, styles.label]}>
-            {I18n.t('home.bottomLabel')}
-          </Text>
-        </View>
+        {content}
       </WorkScreen>
     );
   };
@@ -84,6 +100,11 @@ const styles = StyleSheet.create({
   },
   third: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  half: {
+    flex: 5,
     alignItems: 'center',
     justifyContent: 'center'
   }
