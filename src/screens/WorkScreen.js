@@ -9,7 +9,7 @@ export default class WorkScreen extends React.Component {
   static propTypes = {
     lefty: PropTypes.object,
     righty: PropTypes.object,
-    contentStyle: PropTypes.object
+    contentStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number])
   };
 
   /*
