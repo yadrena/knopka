@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import {popNotification} from '../actions/Actions';
+import {popNotification, swipeNotification} from '../actions/Actions';
 import commonStyles from '../styles/common';
 import WorkScreen from './WorkScreen';
 import CardStack from '../components/CardStack';
@@ -37,10 +37,10 @@ class Home extends Component {
   }
 
   renderStack = (righty) => {
-    const {notifications,avatar,nickname} = this.props;
+    const {notifications, avatar, nickname, popNotification, swipeNotification} = this.props;
     return (
       <WorkScreen righty={righty} lefty={null} contentStyle={styles.stack}>
-        <CardStack {...{notifications,avatar,nickname}} onRemove={this.onRemove}/>
+        <CardStack {...{notifications,avatar,nickname}} onRemove={popNotification} onSwipe={swipeNotification}/>
       </WorkScreen>
     );
   };
@@ -86,7 +86,7 @@ class Home extends Component {
 
 }
 
-export default connect(Home.mapStateToProps, {popNotification})(Home);
+export default connect(Home.mapStateToProps, {popNotification, swipeNotification})(Home);
 
 const styles = StyleSheet.create({
   label: {

@@ -11,6 +11,8 @@ export default function reducer(state = initialState, action) {
       return _.uniqBy([...state, payload], 'timestamp');
     case ActionTypes.POP_NOTIFICATION:
       return state.slice(0, -1);
+    case ActionTypes.SWIPE_NOTIFICATION:
+      return state.slice(-1, 3).concat(state.slice(0, -1));
     default:
       return state;
   }
