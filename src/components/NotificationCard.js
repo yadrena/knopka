@@ -3,6 +3,7 @@ import {View, Text, Image, StyleSheet, TouchableWithoutFeedback} from 'react-nat
 import moment from 'moment';
 import i18n from '../i18n/i18n';
 import Avatar from '../components/Avatar';
+import Nickname from '../components/Nickname';
 
 export default class NotificationCard extends React.Component {
   static propTypes = {
@@ -21,12 +22,7 @@ export default class NotificationCard extends React.Component {
       <TouchableWithoutFeedback>
         <View style={[styles.card, this.props.style]}>
           <Avatar avatar={this.props.avatar}/>
-          {
-            this.props.nickname &&
-            <View style={styles.nickBox}>
-              <Text style={styles.nickname}>{this.props.nickname}</Text>
-            </View>
-          }
+          <Nickname nickname={this.props.nickname}/>
           <Text style={styles.message}>{i18n.t(`home.cards.${this.props.notification.code}`)}</Text>
           <Text style={styles.timestamp}>{time}</Text>
         </View>
@@ -47,17 +43,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: CARD_SIZE.width,
     height: CARD_SIZE.height
-  },
-  nickBox: {
-    marginVertical: 16,
-    backgroundColor: '#f5da99',
-    paddingHorizontal: 16,
-    paddingVertical: 4
-  },
-  nickname: {
-    color: '#695627',
-    fontSize: 18,
-    fontWeight: '500'
   },
   message: {
     flex: 1,
