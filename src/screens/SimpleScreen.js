@@ -18,11 +18,13 @@ export default class SimpleScreen extends React.Component {
     bigLogo: true,
     header: '',
     message: '',
-    buttonStyle: 'link'
+    buttonStyle: 'link',
+    buttonText: ''
   };
 
   render() {
     const btnStyle = this.props.buttonStyle === 'button' ? buttonStyle : linkStyle;
+    console.log('render simple screen', 'x'+this.props.buttonText+'x', this.props.buttonText === null,  Boolean(this.props.buttonText));
     return (
       <View style={loginScreensStyle.rootContainer}>
         <CaesarLogo big={this.props.bigLogo}/>
@@ -43,7 +45,7 @@ export default class SimpleScreen extends React.Component {
           </View>
         }
         {
-          this.props.buttonText !== '' &&
+          !!this.props.buttonText && this.props.buttonText.length > 0 &&
           <Button onPress={this.onButtonPress} {...btnStyle}>
             {this.props.buttonText}
           </Button>
@@ -53,7 +55,6 @@ export default class SimpleScreen extends React.Component {
   }
 
   onButtonPress = () => {
-    console.log('Simple screen button was pressed', this.props.onButtonPress);
     this.props.onButtonPress();
   }
 }
